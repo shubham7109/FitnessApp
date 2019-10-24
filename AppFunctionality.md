@@ -1,0 +1,36 @@
+### App Functionality and Layouts
+
+- **Login Page**:
+    - Login using username & password
+    - Or register using a "unique" username & password
+- **Homepage/Dashboard**:
+    - Basic personal info
+    - Interactive buttons:
+        - Personal Profile
+        -  Community list
+        -  View Workout History
+        -  Log Exercise
+        -  Start Exercise
+-  **Other Users / Community List**:
+    - List of all users with names and their pictures
+    - Click to view their profiles and recent workouts.
+- **Personal Workout History**:
+    - Logs all the workouts in a list
+    - Each log should have: Activity, time & calories.
+    - Maybe weekly avg calories burned
+    - Modify / delete workouts
+- **Log Workout:**
+    - Dropdown selector of all activites
+    - Time length of the workout
+    - Optional: Post-workout feedback
+    - Add this to the list of workouts
+- **Automatic workout**:
+    - Dropdown selector of all activites
+    - Background service stopwatch to time workout
+    - When the workout is stopped, add this to the list of workouts
+    - Optional: Ability to pause and resume workout. 
+- **Profile Page**:
+    - Name, profile image e.t.c.
+    - Log current weight
+    - Optional: Weekly/daily weight progress.
+    - Ability to logout of the app.
