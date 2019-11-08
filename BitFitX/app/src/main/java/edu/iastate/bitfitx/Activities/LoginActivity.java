@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import edu.iastate.bitfitx.R;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     //True, when we need to run tests for the database
     private final static boolean IS_DATABASE_TEST_ENABLED = false;
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         //DO NOT REMOVE THIS IF STATEMENT
         if(IS_DATABASE_TEST_ENABLED){

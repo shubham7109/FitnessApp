@@ -94,6 +94,10 @@ public class DataProvider extends Interfaces {
         }
     }
 
+    /**
+     * Get a user from the DB
+     * @param emailID email-ID of the user
+     */
     public void getUser(String emailID, final UserCallback callback){
         try{
             db.collection("users")
@@ -127,6 +131,10 @@ public class DataProvider extends Interfaces {
         }
     }
 
+    /**
+     * Get all the users from the database
+     * @param callback gets a list of all users
+     */
     public void getAllUsers(final UserListCallback callback){
         db.collection("users")
                 .get()
