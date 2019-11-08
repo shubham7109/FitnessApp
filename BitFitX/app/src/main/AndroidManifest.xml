@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity
             android:name=".Activities.DatabaseTestActivity"
             android:label="@string/title_activity_database_test"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Activities.MainActivity">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
