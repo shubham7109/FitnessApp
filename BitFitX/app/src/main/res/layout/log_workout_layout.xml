@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/workout_length"
             android:layout_width="306dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -33,7 +33,7 @@
             android:text="@string/type_of_workout" />
 
         <Spinner
-            android:id="@+id/spinner3"
+            android:id="@+id/spinner"
             android:layout_width="222dp"
             android:layout_height="50dp"
             android:layout_weight="1" />
@@ -41,7 +41,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/workout_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -49,7 +49,7 @@
         android:text="@string/comments_on_workout" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add_workout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_workout" />
