@@ -11,6 +11,6 @@ public class LogWorkoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.logworkout_layout);
+        setContentView(R.layout.log_workout_layout);
     }
 }

@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         //TODO Add stuff here.. Maybe login/registration page.
 
         //TODO: Run this when user is logged in or registers
-        startActivity(new Intent(this, DatabaseTestActivity.class));
+        startActivity(new Intent(this, DashboardActivity.class));
 
 
     }
