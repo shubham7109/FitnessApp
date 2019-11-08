@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "150777472417",
+    "firebase_url": "https://bitfitx-a4b7e.firebaseio.com",
+    "project_id": "bitfitx-a4b7e",
+    "storage_bucket": "bitfitx-a4b7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150777472417:android:78fc789099109df08fd7e0",
+        "android_client_info": {
+          "package_name": "edu.iastate.bitfitx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150777472417-purq9kme1ienm0h1cljlbsa5unb1rpsh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.iastate.bitfitx",
+            "certificate_hash": "dcf50a36ba46d96af667ff857250e8340ea20f61"
+          }
+        },
+        {
+          "client_id": "150777472417-tdrj9pb6m9qscn5l9gpfpj1plhru2jqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.iastate.bitfitx",
+            "certificate_hash": "e1dc821419497b7a1c922bffd73fa884e168574a"
+          }
+        },
+        {
+          "client_id": "150777472417-sl6llp6906uuest8d6entt17c2mmlhi5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBimTWFb9QG05YrzzJ5goISM1Luq_B6cVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150777472417-sl6llp6906uuest8d6entt17c2mmlhi5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
