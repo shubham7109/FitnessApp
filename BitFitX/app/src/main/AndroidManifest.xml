@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.LogWorkoutActivity"></activity>
+        <activity android:name=".Activities.WorkoutHistoryActivity"></activity>
+        <activity android:name=".Activities.CommunityListActivity" />
+        <activity android:name=".Activities.TrackWorkoutActivity" />
+        <activity android:name=".Activities.LogWorkoutActivity" />
         <activity android:name=".Activities.DashboardActivity" />
         <activity
             android:name=".Activities.DatabaseTestActivity"
