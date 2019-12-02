@@ -15,8 +15,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     /**
      * Shared Preferences used to automatically save the user's email
-     */
-    private SharedPreferences mSharedPreferences;
+    */
     private String username;
 
     @Override
@@ -24,16 +23,8 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard_layout);
 
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        mSharedPreferences.edit().clear().commit();
-
-        if (mSharedPreferences.getString("email", null)==null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-        }
-        else{
-            username = mSharedPreferences.getString("email", null);
-        }
+        Intent intent = getIntent();
+        username = intent.getStringExtra(LoginActivity.USER);
 
         Button logWorkoutButton = findViewById(R.id.log_workout);
         logWorkoutButton.setOnClickListener(new View.OnClickListener() {

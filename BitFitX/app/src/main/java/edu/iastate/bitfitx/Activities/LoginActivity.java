@@ -36,11 +36,10 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Title of the list that is going to be edited. The string is passed to the second activity for editing.
      */
-    public static final String USER = "";
+    public static final String USER = "email";
 
     DataProvider dp;
     TextView errorMsg;
-    //EditText password_txt;
 
     //True, when we need to run tests for the database
     private final static boolean IS_DATABASE_TEST_ENABLED = false;
@@ -49,6 +48,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        //mSharedPreferences.edit().clear().commit();
+
+        if (mSharedPreferences.getString("email", null)!=null){
+            Intent intent = new Intent(this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         dp = DataProvider.getInstance();
 
@@ -74,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 dp.getUser(email, new Interfaces.UserCallback() {
                     @Override
                     public void onCompleted(UserModel user) {
+                        mSharedPreferences.edit().putString("email", email).commit();
                         openDashboard(email);
                     }
 
@@ -105,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DashboardActivity.class);
         intent.putExtra(USER, email);
         startActivity(intent);
+        finish();
     }
 
 }
