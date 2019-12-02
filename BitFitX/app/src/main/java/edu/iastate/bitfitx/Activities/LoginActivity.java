@@ -82,8 +82,13 @@ public class LoginActivity extends AppCompatActivity {
                 dp.getUser(email, new Interfaces.UserCallback() {
                     @Override
                     public void onCompleted(UserModel user) {
-                        mSharedPreferences.edit().putString("email", email).commit();
-                        openDashboard(email);
+                        if (user.getPassword().equals(password)) {
+                            mSharedPreferences.edit().putString("email", email).commit();
+                            openDashboard(email);
+                        }
+                        else{
+                            onError("Incorrect Password");
+                        }
                     }
 
                     @Override
