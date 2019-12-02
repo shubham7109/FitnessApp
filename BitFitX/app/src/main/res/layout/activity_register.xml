@@ -14,9 +14,9 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="272dp" />
+            android:layout_height="243dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/firstname_text"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <TextView
+        <EditText
             android:id="@+id/lastname_text"
             android:layout_width="300dp"
             android:layout_height="40dp"
