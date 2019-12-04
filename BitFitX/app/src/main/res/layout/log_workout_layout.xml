@@ -8,58 +8,68 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/log_a_workout"
         android:textSize="30sp"
         tools:text="Log a Workout" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select Date" />
 
         <DatePicker
             android:id="@+id/datePicker"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:datePickerMode="spinner" />
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start Time:"/>
+            android:text="Start Time:" />
 
         <TimePicker
             android:id="@+id/start_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:timePickerMode="spinner" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="End Time:  "/>
+            android:text="End Time:  " />
 
         <TimePicker
             android:id="@+id/end_picker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:timePickerMode="spinner" />
 
     </LinearLayout>
@@ -74,7 +84,7 @@
             android:layout_width="387dp"
             android:layout_height="29dp"
             android:layout_weight="1"
-            android:text="TextView"
+            android:text="@string/type_of_workout"
             tools:text="@string/type_of_workout" />
 
         <Spinner
