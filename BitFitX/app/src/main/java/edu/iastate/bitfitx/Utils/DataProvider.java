@@ -117,7 +117,8 @@ public class DataProvider extends Interfaces {
                                         data.get("firstName").toString(),
                                         data.get("lastName").toString(),
                                         data.get("email").toString(),
-                                        data.get("password").toString()
+                                        data.get("password").toString(),
+                                        data.get("weight").toString()
                                 );
 
                                 callback.onCompleted(userModel);
@@ -150,7 +151,8 @@ public class DataProvider extends Interfaces {
                                         data.get("firstName").toString(),
                                         data.get("lastName").toString(),
                                         data.get("email").toString(),
-                                        data.get("password").toString()
+                                        data.get("password").toString(),
+                                        data.get("weight").toString()
                                 );
                                 modelUsersList.add(modelUser);
                             }

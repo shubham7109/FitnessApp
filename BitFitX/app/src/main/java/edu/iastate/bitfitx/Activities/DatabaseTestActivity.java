@@ -60,7 +60,11 @@ public class DatabaseTestActivity extends AppCompatActivity{
     }
 
     private void createUserTest() {
-        UserModel userModel = new UserModel(getRandString(4),getRandString(4),getRandString(3) + "@iastate.edu", getRandString(3));
+        UserModel userModel = new UserModel(getRandString(4),
+                                            getRandString(4),
+                                            getRandString(3) + "@iastate.edu",
+                                            getRandString(3),
+                                            String.valueOf(getRandDouble(3)));
         dataProvider.addUser(userModel, new Interfaces.DataProviderCallback() {
             @Override
             public void onCompleted() {

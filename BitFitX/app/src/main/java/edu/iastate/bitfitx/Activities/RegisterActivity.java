@@ -23,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     String lastName;
     String email;
     String password;
+    String weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText last_txt = (EditText) findViewById(R.id.lastname_text);
         final EditText email_txt = (EditText) findViewById(R.id.email_text);
         final EditText password_txt = (EditText) findViewById(R.id.password_text);
+        final EditText weight_txt = (EditText) findViewById(R.id.weight_text);
 
         Button register = (Button) findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
                 lastName = last_txt.getText().toString();
                 email = email_txt.getText().toString();
                 password = password_txt.getText().toString();
+                weight = weight_txt.getText().toString();
 
-                user = new UserModel(firstName, lastName, email, password);
+                user = new UserModel(firstName, lastName, email, password,weight);
                 dp = new DataProvider();
                 dp.addUser(user, new Interfaces.DataProviderCallback() {
                     @Override
