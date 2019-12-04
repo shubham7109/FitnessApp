@@ -56,8 +56,8 @@ public class LogWorkoutActivity extends AppCompatActivity {
 
     public void onAddWorkoutButtonClicked(View view){
         workoutComments = comments.getText().toString();
-        if(workoutComments == null){
-
+        if(workoutComments == null || workoutComments == ""){
+            Toast.makeText(LogWorkoutActivity.this, "Please enter Comments about your workout", Toast.LENGTH_LONG).show();
         }
         workoutLength = length.getText().toString();
         workoutType = mySpinner.getSelectedItem().toString();
