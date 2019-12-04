@@ -75,8 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
             return true;
 
         }else if(id==R.id.action_logout){
-            mSharedPreferences.edit().putString(LoginActivity.EMAIL_KEY,null).commit();
-            String tmp =mSharedPreferences.getString(LoginActivity.EMAIL_KEY,"test");
+            mSharedPreferences.edit().clear().commit();
             openLogin();
         }
         

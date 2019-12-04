@@ -55,8 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         dp = DataProvider.getInstance();
         mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
-        String tmp = mSharedPreferences.getString(EMAIL_KEY, null);
-
         if (mSharedPreferences.getString(EMAIL_KEY, null)!=null){
             openDashboard(mSharedPreferences.getString(EMAIL_KEY, null));
         }
