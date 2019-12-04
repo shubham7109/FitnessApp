@@ -49,18 +49,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        dp = DataProvider.getInstance();
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        //mSharedPreferences.edit().clear().commit();
 
         if (mSharedPreferences.getString("email", null)!=null){
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+            openDashboard(mSharedPreferences.getString("email", null));
         }
 
-        dp = DataProvider.getInstance();
-
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        //mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
         //DO NOT REMOVE THIS IF STATEMENT
         if (IS_DATABASE_TEST_ENABLED) {
