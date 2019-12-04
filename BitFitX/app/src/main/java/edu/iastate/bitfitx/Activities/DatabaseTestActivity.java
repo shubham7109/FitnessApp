@@ -29,13 +29,28 @@ public class DatabaseTestActivity extends AppCompatActivity{
         createUserTest();
         getUserTest();
         getAllUsersTest();
+        updateUserWeightTest();
+    }
+
+    private void updateUserWeightTest() {
+        dataProvider.updateWeight("qqa@iastate.edu", "69", new Interfaces.DataProviderCallback() {
+            @Override
+            public void onCompleted() {
+                Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
     }
 
     private void getAllUsersTest() {
         dataProvider.getAllUsers(new Interfaces.UserListCallback() {
             @Override
             public void onCompleted(ArrayList<UserModel> user) {
-                Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -61,10 +76,10 @@ public class DatabaseTestActivity extends AppCompatActivity{
 
     private void createUserTest() {
         UserModel userModel = new UserModel(getRandString(4),
-                                            getRandString(4),
-                                            getRandString(3) + "@iastate.edu",
-                                            getRandString(3),
-                                            String.valueOf(getRandDouble(3)));
+                getRandString(4),
+                getRandString(3) + "@iastate.edu",
+                getRandString(3),
+                String.valueOf(getRandDouble(3)));
         dataProvider.addUser(userModel, new Interfaces.DataProviderCallback() {
             @Override
             public void onCompleted() {

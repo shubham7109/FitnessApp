@@ -94,6 +94,33 @@ public class DataProvider extends Interfaces {
         }
     }
 
+    public void updateWeight(String emailID, final String weightInLbs, final DataProviderCallback callback){
+        getUser(emailID, new UserCallback() {
+            @Override
+            public void onCompleted(UserModel user) {
+                user.setWeight(weightInLbs); //Weight has now been updated
+                addUser(user, new DataProviderCallback() {
+                    @Override
+                    public void onCompleted() {
+                        callback.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        callback.onError(msg);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+
+    }
+
     /**
      * Get a user from the DB
      * @param emailID email-ID of the user
