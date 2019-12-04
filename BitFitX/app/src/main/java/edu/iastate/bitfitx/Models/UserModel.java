@@ -1,17 +1,38 @@
 package edu.iastate.bitfitx.Models;
 
+import java.util.ArrayList;
+
 public class UserModel {
 
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private String weight;
+    private ArrayList<WorkoutModel> workoutList;
 
-    public UserModel(String firstName, String lastName, String email, String password) {
+    public UserModel(String firstName, String lastName, String email, String password, String weight) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.weight = weight;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public ArrayList<WorkoutModel> getWorkoutList() {
+        return workoutList;
+    }
+
+    public void setWorkoutList(ArrayList<WorkoutModel> workoutList) {
+        this.workoutList = workoutList;
     }
 
     public String getFirstName() {
