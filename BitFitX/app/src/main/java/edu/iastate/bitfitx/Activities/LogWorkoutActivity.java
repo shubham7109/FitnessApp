@@ -79,6 +79,8 @@ public class LogWorkoutActivity extends AppCompatActivity {
 
     public long getWorkoutLength(DatePicker date, TimePicker time){
         Calendar myCalendar = Calendar.getInstance();
+        int test = date.getDayOfMonth();
+        test = date.getMonth();
         myCalendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
         myCalendar.set(Calendar.MONTH, date.getMonth());
         myCalendar.set(Calendar.YEAR, date.getYear());
