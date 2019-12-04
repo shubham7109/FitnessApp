@@ -48,19 +48,6 @@ public class LogWorkoutActivity extends AppCompatActivity {
 // Apply the adapter to the spinner
         mySpinner.setAdapter(adapter);
 
-        //IN CASE SPINNER DOESN'T WORK
-        /*mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(LogWorkoutActivity.this, mySpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                //TODO Auto-generated method stub
-            }
-        });*/
-
         addWorkout = findViewById(R.id.add_workout_button);
         startPicker = findViewById(R.id.start_picker);
         endPicker = findViewById(R.id.end_picker);
@@ -70,7 +57,7 @@ public class LogWorkoutActivity extends AppCompatActivity {
     public void onAddWorkoutButtonClicked(View view){
         workoutLength = getWorkoutLength(datePicker, endPicker) - getWorkoutLength(datePicker, startPicker);
         workoutType = mySpinner.getSelectedItem().toString();
-        workoutStartTime = getWorkoutLength(datePicker, startPicker);
+        workoutStartTime = getWorkoutLength(datePicker, startPicker) - 43200000;
         caloriesBurned = 100;
 
         workout = new WorkoutModel(workoutType, caloriesBurned, workoutLength, workoutStartTime);
