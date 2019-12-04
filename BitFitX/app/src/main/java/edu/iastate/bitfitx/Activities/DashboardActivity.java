@@ -76,11 +76,9 @@ public class DashboardActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
-
-            //TODO: OPEN A SETTINGS ACTIVITY\
-            //Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(DashboardActivity.this, SettingsActivity.class);
             intent.putExtra(USER, username);
+            startActivity(intent);
             return true;
 
         }else if(id==R.id.action_logout){

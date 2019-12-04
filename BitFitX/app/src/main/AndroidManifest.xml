@@ -13,7 +13,7 @@
         <activity android:name=".Activities.WorkoutHistoryActivity"></activity>
         <activity android:name=".Activities.CommunityListActivity" />
         <activity android:name=".Activities.TrackWorkoutActivity" />
-        <activity android:name=".Activities.Settings" />
+        <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.LogWorkoutActivity"></activity>
         <activity android:name=".Activities.DashboardActivity"></activity>
         <activity android:name=".Activities.RegisterActivity"></activity>
