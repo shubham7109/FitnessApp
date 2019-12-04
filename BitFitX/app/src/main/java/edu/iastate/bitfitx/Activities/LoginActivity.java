@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
 
      SharedPreferences mSharedPreferences;
     /**
-     * Title of the list that is going to be edited. The string is passed to the second activity for editing.
+     * String of the user's email that is passed to the dashboard activity.
      */
     public static final String USER = "email";
 
@@ -55,8 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         if (mSharedPreferences.getString("email", null)!=null){
             openDashboard(mSharedPreferences.getString("email", null));
         }
-
-        //mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
         //DO NOT REMOVE THIS IF STATEMENT
         if (IS_DATABASE_TEST_ENABLED) {

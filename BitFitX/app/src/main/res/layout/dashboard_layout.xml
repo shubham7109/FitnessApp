@@ -34,10 +34,10 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/user_name"
+                android:id="@+id/first_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFC107"
+                android:textColor="#FFB700"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
             android:padding="15dp"
             android:text="Your Stats:"
             android:textAllCaps="false"
-            android:textColor="#F#000000F9800"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -77,8 +77,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="250 cal"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#371688"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -102,8 +103,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="55 mins"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#371688"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -124,11 +126,12 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/weight_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="180 lbs"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#371688"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -155,7 +158,7 @@
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:background="@drawable/round_shape_btn"
-        android:backgroundTint="#FFB700"
+        android:backgroundTint="#FFC800"
         android:text="Log workout"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -170,7 +173,7 @@
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:background="@drawable/round_shape_btn"
-        android:backgroundTint="#FFB700"
+        android:backgroundTint="#FFC800"
         android:text="Track Workout"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -185,7 +188,7 @@
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:background="@drawable/round_shape_btn"
-        android:backgroundTint="#FFB700"
+        android:backgroundTint="#FFC800"
         android:text="Community List"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -200,7 +203,7 @@
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:background="@drawable/round_shape_btn"
-        android:backgroundTint="#FFB700"
+        android:backgroundTint="#FFC800"
         android:text="Workout History"
         android:textAllCaps="false"
         android:textColor="@color/black"
