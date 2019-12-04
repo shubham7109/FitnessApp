@@ -52,6 +52,7 @@
         android:id="@+id/add_workout_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="onAddWorkoutButtonClicked"
         android:text="@string/add_workout" />
 
 </LinearLayout>
