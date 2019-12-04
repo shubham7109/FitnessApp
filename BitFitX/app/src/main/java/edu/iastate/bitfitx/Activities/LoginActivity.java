@@ -23,6 +23,9 @@ import edu.iastate.bitfitx.Utils.Interfaces;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static String EMAIL_KEY = "email";
+    public static String PACKAGE_NAME = "edu.iastate.bitfitx";
+
     /**
      * String to store the user's email
      */
@@ -50,10 +53,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         dp = DataProvider.getInstance();
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
-        if (mSharedPreferences.getString("email", null)!=null){
-            openDashboard(mSharedPreferences.getString("email", null));
+        if (mSharedPreferences.getString(EMAIL_KEY, null)!=null){
+            openDashboard(mSharedPreferences.getString(EMAIL_KEY, null));
         }
 
         //DO NOT REMOVE THIS IF STATEMENT
@@ -77,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(UserModel user) {
                         if (user.getPassword().equals(password)) {
-                            mSharedPreferences.edit().putString("email", email).commit();
+                            mSharedPreferences.edit().putString(EMAIL_KEY, email).commit();
                             openDashboard(email);
                         }
                         else{

@@ -17,6 +17,8 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
+
 public class DashboardActivity extends AppCompatActivity {
 
     /**
@@ -48,7 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
         dp = DataProvider.getInstance();
         setUpNavigationActivities();
 
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        mSharedPreferences = getSharedPreferences(LoginActivity.PACKAGE_NAME, Context.MODE_PRIVATE);
 
         dp.getUser(username, new Interfaces.UserCallback() {
             @Override
@@ -74,16 +76,14 @@ public class DashboardActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
+
             //TODO: OPEN A SETTINGS ACTIVITY\
             //Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, SettingsActivity.class);
+            Intent intent = new Intent(DashboardActivity.this, SettingsActivity.class);
             intent.putExtra(USER, username);
-            startActivity(intent);
             return true;
 
         }else if(id==R.id.action_logout){
-            //TODO: Log out of this user and clear prefs
-            //Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
             mSharedPreferences.edit().clear().commit();
             openLogin();
         }
