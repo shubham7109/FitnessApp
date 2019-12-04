@@ -51,7 +51,7 @@
             android:padding="15dp"
             android:text="Your Stats:"
             android:textAllCaps="false"
-            android:textColor="#F#000000F9800"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
