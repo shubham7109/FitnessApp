@@ -13,40 +13,77 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Date" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:datePickerMode="spinner" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="64dp"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/workout_length"
-            android:layout_width="306dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/length_of_workout" />
-
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="162dp"
-            android:layout_height="41dp"
-            android:layout_weight="1"
-            android:text="@string/type_of_workout" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Time:"/>
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="222dp"
-            android:layout_height="50dp"
-            android:layout_weight="1" />
+        <TimePicker
+            android:id="@+id/start_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/workout_comments"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/comments_on_workout" />
+        android:layout_height="64dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Time:  "/>
+
+        <TimePicker
+            android:id="@+id/end_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="387dp"
+            android:layout_height="29dp"
+            android:layout_weight="1"
+            android:text="TextView"
+            tools:text="@string/type_of_workout" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/workout_array" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/add_workout_button"
@@ -54,5 +91,6 @@
         android:layout_height="wrap_content"
         android:onClick="onAddWorkoutButtonClicked"
         android:text="@string/add_workout" />
+
 
 </LinearLayout>

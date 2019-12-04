@@ -7,25 +7,37 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
+import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
+import edu.iastate.bitfitx.Utils.DataProvider;
 
 public class LogWorkoutActivity extends AppCompatActivity {
-    String workoutLength;
-    String workoutComments;
+    DataProvider dp;
+    WorkoutModel workout;
+    long workoutLength;
+    long caloriesBurned;
+    long workoutStartTime;
     String workoutType;
-    EditText length;
-    EditText comments;
     Button addWorkout;
     Spinner mySpinner;
+    TimePicker startPicker;
+    TimePicker endPicker;
+    DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_workout_layout);
+
+        dp = DataProvider.getInstance();
 
         mySpinner = (Spinner) findViewById(R.id.spinner);
 // Create an ArrayAdapter using the string array and a default spinner layout
@@ -49,18 +61,30 @@ public class LogWorkoutActivity extends AppCompatActivity {
             }
         });*/
 
-        length = findViewById(R.id.workout_length);
-        comments = findViewById(R.id.workout_comments);
         addWorkout = findViewById(R.id.add_workout_button);
+        startPicker = findViewById(R.id.start_picker);
+        endPicker = findViewById(R.id.end_picker);
+        datePicker = findViewById(R.id.datePicker);
     }
 
     public void onAddWorkoutButtonClicked(View view){
-        workoutComments = comments.getText().toString();
-        if(workoutComments == null || workoutComments == ""){
-            Toast.makeText(LogWorkoutActivity.this, "Please enter Comments about your workout", Toast.LENGTH_LONG).show();
-        }
-        workoutLength = length.getText().toString();
+        workoutLength = getWorkoutLength(datePicker, endPicker) - getWorkoutLength(datePicker, startPicker);
         workoutType = mySpinner.getSelectedItem().toString();
+        workoutStartTime = getWorkoutLength(datePicker, startPicker);
+        caloriesBurned = 100;
 
+        workout = new WorkoutModel(workoutType, caloriesBurned, workoutLength, workoutStartTime);
+
+    }
+
+    public long getWorkoutLength(DatePicker date, TimePicker time){
+        Calendar myCalendar = Calendar.getInstance();
+        myCalendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
+        myCalendar.set(Calendar.MONTH, date.getMonth());
+        myCalendar.set(Calendar.YEAR, date.getYear());
+        myCalendar.set(Calendar.HOUR, time.getHour());
+        myCalendar.set(Calendar.MINUTE, time.getMinute());
+
+        return myCalendar.getTimeInMillis();
     }
 }
