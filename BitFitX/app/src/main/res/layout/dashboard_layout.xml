@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_slate_gray"
+    android:background="#BECAFF"
     tools:context=".Activities.DashboardActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#BECAFF"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,41 +20,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="25dp">
+            android:padding="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Welcome, "
-                android:textColor="@color/light_grey"
+                android:textColor="#000000"
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/header_name"
+                android:id="@+id/first_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="John Doe"
-                android:textColor="@color/cold"
+                android:textColor="#FFB700"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="Your Stats:"
-            android:textColor="@color/sandy_brown"
-            android:textSize="20sp" />
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,14 +70,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Avg daily calories burn: "
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="250 cal"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#371688"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -92,14 +96,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Avg time of workout: "
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="55 mins"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#371688"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -116,28 +122,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Current Weight: "
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/weight_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="180 lbs"
-                android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textColor="#371688"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
             android:text="Actions:"
-            android:textColor="@color/sandy_brown"
-            android:textSize="20sp" />
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
 
     </LinearLayout>
@@ -147,10 +157,11 @@
         android:id="@+id/log_workout"
         android:layout_width="117dp"
         android:layout_height="wrap_content"
-        android:text="Log workout"
         android:background="@drawable/round_shape_btn"
-        android:textColor="@color/white"
+        android:backgroundTint="#FFC800"
+        android:text="Log workout"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/personal_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -161,10 +172,11 @@
         android:id="@+id/track_workout"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/round_shape_btn"
+        android:backgroundTint="#FFC800"
         android:text="Track Workout"
         android:textAllCaps="false"
-        android:background="@drawable/round_shape_btn"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/community_users"
         app:layout_constraintEnd_toStartOf="@+id/log_workout"
         app:layout_constraintHorizontal_bias="0.5"
@@ -175,10 +187,11 @@
         android:id="@+id/community_users"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:text="Community List"
         android:background="@drawable/round_shape_btn"
+        android:backgroundTint="#FFC800"
+        android:text="Community List"
         android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/personal_history"
         app:layout_constraintHorizontal_bias="0.5"
@@ -189,10 +202,11 @@
         android:id="@+id/personal_history"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/round_shape_btn"
+        android:backgroundTint="#FFC800"
         android:text="Workout History"
         android:textAllCaps="false"
-        android:background="@drawable/round_shape_btn"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

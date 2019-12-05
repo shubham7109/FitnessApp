@@ -1,7 +1,9 @@
 package edu.iastate.bitfitx.Activities;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.Toast;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
@@ -17,6 +20,7 @@ import edu.iastate.bitfitx.Utils.Interfaces;
 public class DatabaseTestActivity extends AppCompatActivity{
 
     DataProvider dataProvider;
+    UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +33,14 @@ public class DatabaseTestActivity extends AppCompatActivity{
         createUserTest();
         getUserTest();
         getAllUsersTest();
+        updateUserWeightTest();
+        addWorkoutTest();
     }
 
-    private void getAllUsersTest() {
-        dataProvider.getAllUsers(new Interfaces.UserListCallback() {
+    private void addWorkoutTest() {
+        dataProvider.addUserWorkout(user.getEmail(), new WorkoutModel("Running", getRandInt(), 4743, 1575504743), new Interfaces.DataProviderCallback() {
             @Override
-            public void onCompleted(ArrayList<UserModel> user) {
+            public void onCompleted() {
                 Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
             }
 
@@ -45,8 +51,36 @@ public class DatabaseTestActivity extends AppCompatActivity{
         });
     }
 
+    private void updateUserWeightTest() {
+        dataProvider.updateWeight(user.getEmail(), "69", new Interfaces.DataProviderCallback() {
+            @Override
+            public void onCompleted() {
+                //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+    }
+
+    private void getAllUsersTest() {
+        dataProvider.getAllUsers(new Interfaces.UserListCallback() {
+            @Override
+            public void onCompleted(ArrayList<UserModel> user) {
+                //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+    }
+
     private void getUserTest() {
-        dataProvider.getUser("lef@iastate.edu", new Interfaces.UserCallback() {
+        dataProvider.getUser(user.getEmail(), new Interfaces.UserCallback() {
             @Override
             public void onCompleted(UserModel user) {
                 //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
@@ -61,10 +95,11 @@ public class DatabaseTestActivity extends AppCompatActivity{
 
     private void createUserTest() {
         UserModel userModel = new UserModel(getRandString(4),
-                                            getRandString(4),
-                                            getRandString(3) + "@iastate.edu",
-                                            getRandString(3),
-                                            String.valueOf(getRandDouble(3)));
+                getRandString(4),
+                getRandString(3) + "@iastate.edu",
+                getRandString(3),
+                String.valueOf(getRandDouble(3)));
+        user = userModel;
         dataProvider.addUser(userModel, new Interfaces.DataProviderCallback() {
             @Override
             public void onCompleted() {
@@ -101,5 +136,12 @@ public class DatabaseTestActivity extends AppCompatActivity{
         String saltStr = salt.toString();
         return Double.parseDouble(saltStr);
     }
+
+    public static int getRandInt(){
+        int min = 100;
+        int max = 1000;
+        return (int)(Math.random() * ((max - min) + 1)) + min;
+    }
+
 
 }

@@ -23,6 +23,9 @@ import edu.iastate.bitfitx.Utils.Interfaces;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static String EMAIL_KEY = "email";
+    public static String PACKAGE_NAME = "edu.iastate.bitfitx";
+
     /**
      * String to store the user's email
      */
@@ -34,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
      SharedPreferences mSharedPreferences;
     /**
-     * Title of the list that is going to be edited. The string is passed to the second activity for editing.
+     * String of the user's email that is passed to the dashboard activity.
      */
     public static final String USER = "email";
 
@@ -49,23 +52,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        //mSharedPreferences.edit().clear().commit();
-
-        if (mSharedPreferences.getString("email", null)!=null){
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
+        //DO NOT REMOVE THIS IF STATEMENT
+        if (IS_DATABASE_TEST_ENABLED) {
+            startActivity(new Intent(this, DatabaseTestActivity.class));
             finish();
         }
 
         dp = DataProvider.getInstance();
+        mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
-
-        //DO NOT REMOVE THIS IF STATEMENT
-        if (IS_DATABASE_TEST_ENABLED) {
-            startActivity(new Intent(this, DatabaseTestActivity.class));
+        if (mSharedPreferences.getString(EMAIL_KEY, null)!=null){
+            openDashboard(mSharedPreferences.getString(EMAIL_KEY, null));
         }
+
 
         final EditText email_txt = (EditText) findViewById(R.id.email_text);
         final EditText password_txt = (EditText) findViewById(R.id.password_text);
@@ -83,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(UserModel user) {
                         if (user.getPassword().equals(password)) {
-                            mSharedPreferences.edit().putString("email", email).commit();
+                            mSharedPreferences.edit().putString(EMAIL_KEY, email).commit();
                             openDashboard(email);
                         }
                         else{
