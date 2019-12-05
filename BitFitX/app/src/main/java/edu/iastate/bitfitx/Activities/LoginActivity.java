@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView errorMsg;
 
     //True, when we need to run tests for the database
-    private final static boolean IS_DATABASE_TEST_ENABLED = true;
+    private final static boolean IS_DATABASE_TEST_ENABLED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
