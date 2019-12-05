@@ -52,6 +52,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //DO NOT REMOVE THIS IF STATEMENT
+        if (IS_DATABASE_TEST_ENABLED) {
+            startActivity(new Intent(this, DatabaseTestActivity.class));
+            finish();
+        }
+
         dp = DataProvider.getInstance();
         mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
@@ -59,10 +65,6 @@ public class LoginActivity extends AppCompatActivity {
             openDashboard(mSharedPreferences.getString(EMAIL_KEY, null));
         }
 
-        //DO NOT REMOVE THIS IF STATEMENT
-        if (IS_DATABASE_TEST_ENABLED) {
-            startActivity(new Intent(this, DatabaseTestActivity.class));
-        }
 
         final EditText email_txt = (EditText) findViewById(R.id.email_text);
         final EditText password_txt = (EditText) findViewById(R.id.password_text);

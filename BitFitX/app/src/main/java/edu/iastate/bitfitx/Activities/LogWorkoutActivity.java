@@ -2,6 +2,8 @@ package edu.iastate.bitfitx.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +20,7 @@ import java.util.Calendar;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
+import edu.iastate.bitfitx.Utils.Interfaces;
 
 public class LogWorkoutActivity extends AppCompatActivity {
     DataProvider dp;
@@ -61,6 +64,20 @@ public class LogWorkoutActivity extends AppCompatActivity {
         caloriesBurned = 100;
 
         workout = new WorkoutModel(workoutType, caloriesBurned, workoutLength, workoutStartTime);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PACKAGE_NAME, Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email","");
+        dp.addUserWorkout(email, workout, new Interfaces.DataProviderCallback() {
+            @Override
+            public void onCompleted() {
+                Toast.makeText(LogWorkoutActivity.this, "Added successfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(String msg) {
+                Toast.makeText(LogWorkoutActivity.this, "Error while adding: " +msg, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

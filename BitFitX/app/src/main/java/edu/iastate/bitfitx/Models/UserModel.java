@@ -17,6 +17,11 @@ public class UserModel {
         this.email = email;
         this.password = password;
         this.weight = weight;
+        workoutList = new ArrayList<>();
+    }
+
+    public void addWorkout(WorkoutModel workoutModel){
+        workoutList.add(workoutModel);
     }
 
     public String getWeight() {
@@ -29,10 +34,6 @@ public class UserModel {
 
     public ArrayList<WorkoutModel> getWorkoutList() {
         return workoutList;
-    }
-
-    public void setWorkoutList(ArrayList<WorkoutModel> workoutList) {
-        this.workoutList = workoutList;
     }
 
     public String getFirstName() {

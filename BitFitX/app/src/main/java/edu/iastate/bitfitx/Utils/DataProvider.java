@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WorkoutModel;
 
 /**
  * This class will provide data from Firestore on
@@ -48,34 +49,6 @@ public class DataProvider extends Interfaces {
      * @param modelUser The model user to add
      */
     public void addUser(UserModel modelUser, final DataProviderCallback dataProviderCallback){
-        // Create a new user with a first and last name
-        Map<String, Object> user = new HashMap<>();
-
-        user.put("first", modelUser.getFirstName());
-        user.put("last", modelUser.getLastName());
-        user.put("email", modelUser.getEmail());
-        user.put("password", modelUser.getPassword());
-
-        String documentPath = modelUser.getEmail();
-        //DocumentReference documentReference = db.document(documentPath);
-
-        // Add a new document with a generated ID
-        db.collection("users").document(documentPath)
-                .set(user)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        dataProviderCallback.onCompleted();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        dataProviderCallback.onError("Error adding document" + e.getMessage());
-                    }
-                });
-
-        // Get a new write batch
         WriteBatch batch = db.batch();
 
         DocumentReference donationRef = db.collection("users").document(modelUser.getEmail());
@@ -94,30 +67,49 @@ public class DataProvider extends Interfaces {
         }
     }
 
+    public void addUserWorkout(String emailID, final WorkoutModel workoutModel, final DataProviderCallback callback) {
+        WriteBatch batch = db.batch();
+        DocumentReference donationRef = db.collection("users").document(emailID).collection("workouts").document();
+        batch.set(donationRef, workoutModel);
+
+        // Commit the batch
+        try{
+            batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    callback.onCompleted();
+                }
+            });
+        }catch (Exception e){
+            callback.onError("Error adding document" + e.getMessage());
+        }
+    }
+
+
     public void updateWeight(String emailID, final String weightInLbs, final DataProviderCallback callback){
-        getUser(emailID, new UserCallback() {
-            @Override
-            public void onCompleted(UserModel user) {
-                user.setWeight(weightInLbs); //Weight has now been updated
-                addUser(user, new DataProviderCallback() {
-                    @Override
-                    public void onCompleted() {
-                        callback.onCompleted();
-                    }
+    getUser(emailID, new UserCallback() {
+        @Override
+        public void onCompleted(UserModel user) {
+            user.setWeight(weightInLbs); //Weight has now been updated
+            addUser(user, new DataProviderCallback() {
+                @Override
+                public void onCompleted() {
+                    callback.onCompleted();
+                }
 
-                    @Override
-                    public void onError(String msg) {
-                        callback.onError(msg);
-                    }
-                });
+                @Override
+                public void onError(String msg) {
+                    callback.onError(msg);
+                }
+            });
 
-            }
+        }
 
-            @Override
-            public void onError(String msg) {
+        @Override
+        public void onError(String msg) {
 
-            }
-        });
+        }
+    });
 
     }
 
