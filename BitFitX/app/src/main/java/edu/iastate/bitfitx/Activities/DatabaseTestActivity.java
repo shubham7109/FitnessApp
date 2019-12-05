@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,6 +36,21 @@ public class DatabaseTestActivity extends AppCompatActivity{
         getAllUsersTest();
         updateUserWeightTest();
         addWorkoutTest();
+        getWorkoutsTest();
+    }
+
+    private void getWorkoutsTest() {
+        dataProvider.getAllWorkouts("lhealy@iastate.edu", new Interfaces.WorkoutlistCallback() {
+            @Override
+            public void onCompleted(ArrayList<WorkoutModel> workouts) {
+                Log.e("test","test");
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
     }
 
     private void addWorkoutTest() {

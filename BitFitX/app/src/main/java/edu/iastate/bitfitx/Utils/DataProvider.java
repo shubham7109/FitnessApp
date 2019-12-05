@@ -117,7 +117,7 @@ public class DataProvider extends Interfaces {
      * Get a user from the DB
      * @param emailID email-ID of the user
      */
-    public void getUser(String emailID, final UserCallback callback){
+    public void getUser(final String emailID, final UserCallback callback){
         try{
             db.collection("users")
                     .document(emailID)
@@ -132,7 +132,7 @@ public class DataProvider extends Interfaces {
                                     callback.onError("No User found");
                                     return;
                                 }
-                                UserModel userModel = new UserModel(
+                                final UserModel userModel = new UserModel(
                                         data.get("firstName").toString(),
                                         data.get("lastName").toString(),
                                         data.get("email").toString(),
@@ -140,7 +140,20 @@ public class DataProvider extends Interfaces {
                                         data.get("weight").toString()
                                 );
 
-                                callback.onCompleted(userModel);
+                                getAllWorkouts(emailID, new WorkoutlistCallback() {
+                                    @Override
+                                    public void onCompleted(ArrayList<WorkoutModel> workouts) {
+                                        userModel.setWorkoutList(workouts);
+                                        callback.onCompleted(userModel);
+                                    }
+
+                                    @Override
+                                    public void onError(String msg) {
+                                        callback.onCompleted(userModel);
+                                    }
+                                });
+
+
                             } else {
                                 callback.onError("Error getting user: " + task.getException().getMessage());
                             }
@@ -176,6 +189,35 @@ public class DataProvider extends Interfaces {
                                 modelUsersList.add(modelUser);
                             }
                             callback.onCompleted(modelUsersList);
+                        } else {
+                            callback.onError("Error getting user: " + task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+    public void getAllWorkouts(String emailID, final WorkoutlistCallback callback){
+        db.collection("users")
+                .document(emailID)
+                .collection("workouts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("MSG", document.getId() + " => " + document.getData());
+                                Map data = document.getData();
+                                WorkoutModel modelUser = new WorkoutModel(
+                                        data.get("workoutType").toString(),
+                                        Long.valueOf(data.get("caloriesBurned").toString()),
+                                        Long.valueOf(data.get("lengthOfWorkout").toString()),
+                                        Long.valueOf(data.get("workoutStartTime").toString())
+                                );
+                                workoutModels.add(modelUser);
+                            }
+                            callback.onCompleted(workoutModels);
                         } else {
                             callback.onError("Error getting user: " + task.getException().getMessage());
                         }

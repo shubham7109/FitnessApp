@@ -20,6 +20,10 @@ public class UserModel {
         workoutList = new ArrayList<>();
     }
 
+    public void setWorkoutList(ArrayList<WorkoutModel> workoutList) {
+        this.workoutList = workoutList;
+    }
+
     public void addWorkout(WorkoutModel workoutModel){
         workoutList.add(workoutModel);
     }
