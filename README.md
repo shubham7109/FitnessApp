@@ -25,20 +25,20 @@ Functionality for the app:
 Features with use cases:
 1. ViewModel
     - Recyclerviews
-2. Fragments
-    - Content on screen
+2. ~~Fragments~~
+    - ~~Content on screen~~ We are using activities
 3. Threading (AsyncTask, Service, WorkManager, AlarmManager, DownloadManager...)
-    - Downloading user data
+    - ~~Downloading user data~~ Timer stopwatch
 4. Persistent storage via files or SharedPreferences
-    - Recent Activities/Workouts
+    - ~~Recent Activities/Workouts~~ Used to store email-id
 5. SQLite
     - Realm Java implementation
 6. Gestures
     - Lists, navigation, and layouts.
 7. Animations
     - Transition between views
-8. Camera
-    - Adding photos to profile
+8. ~~Camera~~
+    - ~~Adding photos to profile~~
 9. Internet connectivity
     - Communication with the backend (e.g. Firebase)
 
