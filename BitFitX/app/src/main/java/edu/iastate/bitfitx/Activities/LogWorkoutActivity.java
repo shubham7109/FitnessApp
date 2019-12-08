@@ -67,17 +67,24 @@ public class LogWorkoutActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PACKAGE_NAME, Context.MODE_PRIVATE);
         String email = sharedPreferences.getString("email","");
-        dp.addUserWorkout(email, workout, new Interfaces.DataProviderCallback() {
-            @Override
-            public void onCompleted() {
-                Toast.makeText(LogWorkoutActivity.this, "Added successfully", Toast.LENGTH_SHORT).show();
-            }
+        if(workoutLength > 0 ){
+            dp.addUserWorkout(email, workout, new Interfaces.DataProviderCallback() {
+                @Override
+                public void onCompleted() {
+                    Toast.makeText(LogWorkoutActivity.this, "Added successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
 
-            @Override
-            public void onError(String msg) {
-                Toast.makeText(LogWorkoutActivity.this, "Error while adding: " +msg, Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onError(String msg) {
+                    Toast.makeText(LogWorkoutActivity.this, "Error while adding: " +msg, Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+        }else{
+            Toast.makeText(this, "Workout length cannot be negative", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
