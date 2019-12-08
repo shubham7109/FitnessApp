@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +14,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
@@ -76,9 +82,15 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             WorkoutModel workoutModel = workoutModels.get(position);
-            holder.date.setText(String.valueOf(workoutModel.getWorkoutStartTime()));
+            Date date = new Date(workoutModel.getWorkoutStartTime());
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            format.setTimeZone(TimeZone.getDefault());
+
+            @SuppressLint("DefaultLocale") String lengthString = String.format("%d min",TimeUnit.MILLISECONDS.toMinutes(workoutModel.getLengthOfWorkout()));
+
+            holder.date.setText(format.format(date));
             holder.workoutType.setText(String.valueOf(workoutModel.getWorkoutType()));
-            holder.workoutLength.setText(String.valueOf(workoutModel.getLengthOfWorkout()));
+            holder.workoutLength.setText(lengthString);
             holder.caloriesBurnt.setText(String.valueOf(workoutModel.getCaloriesBurned()));
 
         }

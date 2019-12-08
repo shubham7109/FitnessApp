@@ -18,6 +18,8 @@ import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -217,6 +219,17 @@ public class DataProvider extends Interfaces {
                                 );
                                 workoutModels.add(modelUser);
                             }
+
+
+                            Collections.sort(workoutModels, new Comparator<WorkoutModel>() {
+                                @Override
+                                public int compare(WorkoutModel workoutModel, WorkoutModel t1) {
+                                    return Long.compare(workoutModel.getWorkoutStartTime(), t1.getWorkoutStartTime());
+                                }
+                            });
+                            Collections.reverse(workoutModels);
+
+
                             callback.onCompleted(workoutModels);
                         } else {
                             callback.onError("Error getting user: " + task.getException().getMessage());
