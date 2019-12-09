@@ -14,11 +14,11 @@ Functionality for the app:
 2. User can track multiple forms of exercises by starting a timer and logging to the app. 
 3. User can manually log exercises to the app.
 4. Can view other people’s activity.
-5. Share photos of workouts
+5. ~~Share photos of workouts~~
 6. Ability to navigate between multiple views.
 7. Ability to view content using any device.
 8. Supports both portrait and landscape mode.
-9. Ability to delete or modify the workout.
+9. ~~Ability to delete or modify the workout~~
 10. Use modern Android gestures and animations. 
 11. (Bonus) User can view their progress over a certain amount of time
 
@@ -31,8 +31,8 @@ Features with use cases:
     - ~~Downloading user data~~ Timer stopwatch
 4. Persistent storage via files or SharedPreferences
     - ~~Recent Activities/Workouts~~ Used to store email-id
-5. SQLite
-    - Realm Java implementation
+5. ~~SQLite~~
+    - ~~Realm Java implementation~~
 6. Gestures
     - Lists, navigation, and layouts.
 7. Animations
