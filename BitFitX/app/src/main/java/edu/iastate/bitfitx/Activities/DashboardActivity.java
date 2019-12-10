@@ -1,7 +1,6 @@
 package edu.iastate.bitfitx.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +22,6 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
-import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
-
 public class DashboardActivity extends AppCompatActivity {
 
     /**
@@ -36,17 +33,24 @@ public class DashboardActivity extends AppCompatActivity {
      */
     private String username;
     /**
-     * String of the user's email that is passed to the dashboard activity.
+     * String of the user's email that is passed from the login page.
      */
-    public static final String USER = "email";
-
-    TextView name, weight, avgCal, avgDur;
-
+    public static final String EMAIL_KEY = "email";
     /**
-     * User object returned from the DP
+     * Textview of user's statistics to be displayed on the dashboard
+     */
+    TextView name, weight, avgCal, avgDur, goal;
+    /**
+     * User object returned from the dataProvider
      */
     private UserModel userModel;
+    /**
+     * Instance of dataProvider
+     */
     DataProvider dp;
+    /**
+     * List of a user's previous workouts
+     */
     ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
 
     @Override
@@ -55,11 +59,12 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.dashboard_layout);
 
         Intent intent = getIntent();
-        username = intent.getStringExtra(LoginActivity.USER);
+        username = intent.getStringExtra(LoginActivity.EMAIL_KEY);
         name = (TextView) findViewById(R.id.first_name);
         weight = (TextView) findViewById(R.id.weight_txt);
         avgCal = (TextView) findViewById(R.id.avgCalories_txt);
         avgDur = (TextView) findViewById(R.id.avgDuration_txt);
+        goal = (TextView) findViewById(R.id.weight_txt);
 
         dp = DataProvider.getInstance();
         setUpNavigationActivities();
@@ -93,6 +98,22 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume(){
+        dp.getUser(username, new Interfaces.UserCallback() {
+            @Override
+            public void onCompleted(UserModel user) {
+                //name.setText(user.getFirstName());
+                weight.setText(user.getWeight());
+                userModel = user;
+            }
+            @Override
+            public void onError(String msg) { }
+
+        });
+        super.onResume();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.dashboard_menu, menu);
@@ -105,7 +126,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         if (id == R.id.action_settings) {
             Intent intent = new Intent(DashboardActivity.this, SettingsActivity.class);
-            intent.putExtra(USER, username);
+            intent.putExtra(EMAIL_KEY, username);
             startActivity(intent);
             return true;
 
@@ -171,21 +192,29 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Method to set the user's statistics
+     * Method to set the user's statistics. It will calculate the average calories burned per workout and
+     * average duration per workout using the data from workout history
      */
     public void setStats(){
 
         int numWorkouts = workoutModels.size();
         int calories = 0;
         int time = 0;
+        String CALORIES, TIME;
 
-        for(WorkoutModel w: workoutModels){
-            calories += w.getCaloriesBurned();
-            time += w.getLengthOfWorkout();
+        if (numWorkouts != 0) {
+            for (WorkoutModel w : workoutModels) {
+                calories += w.getCaloriesBurned();
+                time += w.getLengthOfWorkout();
+            }
+
+            CALORIES = String.format("%d cal", calories / numWorkouts);
+            TIME = String.format("%d min", TimeUnit.MILLISECONDS.toMinutes(time / numWorkouts));
         }
-
-        String CALORIES = String.format("%d cal",calories/numWorkouts);
-        String TIME = String.format("%d min", TimeUnit.MILLISECONDS.toMinutes(time/numWorkouts));
+        else{
+            CALORIES = String.format("%d cal", 0);
+            TIME = String.format("%d min", 0);
+        }
 
         avgCal.setText(CALORIES);
         avgDur.setText(TIME);

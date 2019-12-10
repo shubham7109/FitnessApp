@@ -28,6 +28,9 @@ public class SettingsActivity extends AppCompatActivity {
      */
     private String username, newWeight;
     TextView weight, firstname, lastname, email, password;
+    /**
+     * Instance of dataProvider
+     */
     DataProvider dp;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         Intent intent = getIntent();
-        username = intent.getStringExtra(LoginActivity.USER);
+        username = intent.getStringExtra(LoginActivity.EMAIL_KEY);
         firstname = (TextView) findViewById(R.id.first_name);
         lastname = (TextView) findViewById(R.id.last_name);
         email = (TextView) findViewById(R.id.email_txt);
@@ -62,7 +65,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Changes a user's weight weight.
+     * Changes a user's current weight.
      * @param view Change weight button that was clicked
      */
     public void onChgWeightClicked (View view) {
@@ -102,6 +105,14 @@ public class SettingsActivity extends AppCompatActivity {
 
     /**
      * Adds a new goal weight.
+     * @param view New Goal button that was clicked
+     */
+    public void onNewGoal (View view) {
+        //mSharedPreferences.edit().putString(EMAIL_KEY, email).commit();
+    }
+
+    /**
+     * Changes the user's current password.
      * @param view Change password button that was clicked
      */
     public void onChgPasswordClicked (View view) {

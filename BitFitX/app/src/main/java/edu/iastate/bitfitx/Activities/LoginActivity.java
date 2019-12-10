@@ -23,6 +23,9 @@ import edu.iastate.bitfitx.Utils.Interfaces;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /**
+     * String of the user's email that is saved in SharedPreferences and passed to the dashboard activity.
+     */
     public static String EMAIL_KEY = "email";
     public static String PACKAGE_NAME = "edu.iastate.bitfitx";
 
@@ -39,10 +42,8 @@ public class LoginActivity extends AppCompatActivity {
      */
     SharedPreferences mSharedPreferences;
     /**
-     * String of the user's email that is passed to the dashboard activity.
+     * Instance of dataProvider
      */
-    public static final String USER = "email";
-
     DataProvider dp;
     TextView errorMsg;
 
@@ -118,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     public void openDashboard(String email){
         Intent intent = new Intent(this, DashboardActivity.class);
-        intent.putExtra(USER, email);
+        intent.putExtra(EMAIL_KEY, email);
         startActivity(intent);
         finish();
     }
