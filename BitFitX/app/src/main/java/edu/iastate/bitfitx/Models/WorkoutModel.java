@@ -22,11 +22,25 @@ public class WorkoutModel {
      */
     private long workoutStartTime;
 
-    public WorkoutModel(String workoutType, long caloriesBurned, long lengthOfWorkout, long workoutStartTime) {
+    /**
+     * First Name of the user
+     */
+    private String userName;
+
+    public WorkoutModel(String workoutType, String userName, long caloriesBurned, long lengthOfWorkout, long workoutStartTime) {
         this.workoutType = workoutType;
         this.caloriesBurned = caloriesBurned;
         this.lengthOfWorkout = lengthOfWorkout;
         this.workoutStartTime = workoutStartTime;
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getWorkoutType() {

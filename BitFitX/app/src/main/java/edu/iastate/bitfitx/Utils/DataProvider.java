@@ -213,6 +213,7 @@ public class DataProvider extends Interfaces {
                                 Map data = document.getData();
                                 WorkoutModel modelUser = new WorkoutModel(
                                         data.get("workoutType").toString(),
+                                        data.get("userName").toString(),
                                         Long.valueOf(data.get("caloriesBurned").toString()),
                                         Long.valueOf(data.get("lengthOfWorkout").toString()),
                                         Long.valueOf(data.get("workoutStartTime").toString())

@@ -34,6 +34,7 @@ public class LogWorkoutActivity extends AppCompatActivity {
     TimePicker startPicker;
     TimePicker endPicker;
     DatePicker datePicker;
+    private String firstName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +42,15 @@ public class LogWorkoutActivity extends AppCompatActivity {
         setContentView(R.layout.log_workout_layout);
 
         dp = DataProvider.getInstance();
-
         mySpinner = (Spinner) findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.workout_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
+        // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
+        // Apply the adapter to the spinner
         mySpinner.setAdapter(adapter);
+        firstName = getIntent().getStringExtra("firstName");
 
         addWorkout = findViewById(R.id.add_workout_button);
         startPicker = findViewById(R.id.start_picker);
@@ -63,7 +64,7 @@ public class LogWorkoutActivity extends AppCompatActivity {
         workoutStartTime = getWorkoutLength(datePicker, startPicker) - 43200000;
         caloriesBurned = 100;
 
-        workout = new WorkoutModel(workoutType, caloriesBurned, workoutLength, workoutStartTime);
+        workout = new WorkoutModel(workoutType, firstName, caloriesBurned, workoutLength, workoutStartTime);
 
         SharedPreferences sharedPreferences = getSharedPreferences(LoginActivity.PACKAGE_NAME, Context.MODE_PRIVATE);
         String email = sharedPreferences.getString("email","");
