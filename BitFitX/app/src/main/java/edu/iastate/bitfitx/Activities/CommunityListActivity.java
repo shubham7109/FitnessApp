@@ -85,6 +85,8 @@ public class CommunityListActivity extends AppCompatActivity {
             holder.workoutType.setText(String.valueOf(workoutModel.getWorkoutType()));
             holder.workoutLength.setText(lengthString);
             holder.caloriesBurnt.setText(String.valueOf(workoutModel.getCaloriesBurned()));
+            holder.userName.setText(workoutModel.getUserName());
+            holder.userName.setVisibility(View.VISIBLE);
 
         }
 
@@ -101,12 +103,14 @@ public class CommunityListActivity extends AppCompatActivity {
             TextView workoutType;
             TextView workoutLength;
             TextView caloriesBurnt;
+            TextView userName;
 
 
             ViewHolder(View itemView) {
                 super(itemView);
                 date = itemView.findViewById(R.id.date);
                 workoutType = itemView.findViewById(R.id.workout_type);
+                userName = itemView.findViewById(R.id.username);
                 workoutLength = itemView.findViewById(R.id.workout_length);
                 caloriesBurnt = itemView.findViewById(R.id.calories_burnt);
             }
