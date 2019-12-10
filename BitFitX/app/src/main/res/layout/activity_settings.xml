@@ -202,6 +202,16 @@ tools:context=".Activities.SettingsActivity">
         android:onClick="onChgPasswordClicked"
         android:text="Change Password" />
 
+    <Button
+        android:id="@+id/set_goal"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#FFC800"
+        android:onClick="onNewGoal"
+        android:text="Change Password"
+        tools:text="Set new weight goal" />
+
 
 </LinearLayout>
 
