@@ -1,9 +1,7 @@
 package edu.iastate.bitfitx.Activities;
 
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -40,7 +38,7 @@ public class DatabaseTestActivity extends AppCompatActivity{
     }
 
     private void getWorkoutsTest() {
-        dataProvider.getAllWorkouts("lhealy@iastate.edu", new Interfaces.WorkoutlistCallback() {
+        dataProvider.getUsersWorkouts("lhealy@iastate.edu", new Interfaces.WorkoutlistCallback() {
             @Override
             public void onCompleted(ArrayList<WorkoutModel> workouts) {
                 Log.e("test","test");

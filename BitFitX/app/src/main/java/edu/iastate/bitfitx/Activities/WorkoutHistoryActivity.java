@@ -43,7 +43,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
             Toast.makeText(this, "Error building activity", Toast.LENGTH_SHORT).show();
         }else{
             final RecyclerView recyclerView = findViewById(R.id.workout_history_rv);
-            dataProvider.getAllWorkouts(email, new Interfaces.WorkoutlistCallback() {
+            dataProvider.getUsersWorkouts(email, new Interfaces.WorkoutlistCallback() {
                 @Override
                 public void onCompleted(ArrayList<WorkoutModel> workouts) {
                     workoutModels = workouts;

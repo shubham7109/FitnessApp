@@ -1,13 +1,10 @@
 package edu.iastate.bitfitx.Utils;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -15,12 +12,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
-import com.google.firebase.firestore.auth.User;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Map;
 
 import edu.iastate.bitfitx.Models.UserModel;
@@ -142,7 +137,7 @@ public class DataProvider extends Interfaces {
                                         data.get("weight").toString()
                                 );
 
-                                getAllWorkouts(emailID, new WorkoutlistCallback() {
+                                getUsersWorkouts(emailID, new WorkoutlistCallback() {
                                     @Override
                                     public void onCompleted(ArrayList<WorkoutModel> workouts) {
                                         userModel.setWorkoutList(workouts);
@@ -198,7 +193,7 @@ public class DataProvider extends Interfaces {
                 });
     }
 
-    public void getAllWorkouts(String emailID, final WorkoutlistCallback callback){
+    public void getUsersWorkouts(String emailID, final WorkoutlistCallback callback){
         db.collection("users")
                 .document(emailID)
                 .collection("workouts")
@@ -237,6 +232,58 @@ public class DataProvider extends Interfaces {
                         }
                     }
                 });
+    }
+
+    private int count = 0;
+    public void getAllWorkouts(final WorkoutlistCallback callback){
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            final ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
+                            final int size = task.getResult().size();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                getUsersWorkouts(document.getId(), new WorkoutlistCallback() {
+                                    @Override
+                                    public void onCompleted(ArrayList<WorkoutModel> workouts) {
+                                        workoutModels.addAll(workouts);
+
+                                        if(++count >= size){
+                                            count = 0;
+
+                                            Collections.sort(workoutModels, new Comparator<WorkoutModel>() {
+                                                @Override
+                                                public int compare(WorkoutModel workoutModel, WorkoutModel t1) {
+                                                    return Long.compare(workoutModel.getWorkoutStartTime(), t1.getWorkoutStartTime());
+                                                }
+                                            });
+                                            Collections.reverse(workoutModels);
+
+
+                                            callback.onCompleted(workoutModels);
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onError(String msg) {
+                                        callback.onError(msg);
+                                    }
+                                });
+
+                            }
+
+
+
+                        } else {
+                            callback.onError("Error getting user: " + task.getException().getMessage());
+                        }
+                    }
+                });
+
     }
 
 }

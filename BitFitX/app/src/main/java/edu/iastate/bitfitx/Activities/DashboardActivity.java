@@ -1,7 +1,6 @@
 package edu.iastate.bitfitx.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,8 +21,6 @@ import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
-
-import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -78,7 +75,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         });
 
-        dp.getAllWorkouts(username, new Interfaces.WorkoutlistCallback() {
+        dp.getUsersWorkouts(username, new Interfaces.WorkoutlistCallback() {
             @Override
             public void onCompleted(ArrayList<WorkoutModel> workouts) {
                 workoutModels = workouts;
