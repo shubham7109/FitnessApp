@@ -14,11 +14,11 @@ Functionality for the app:
 2. User can track multiple forms of exercises by starting a timer and logging to the app. 
 3. User can manually log exercises to the app.
 4. Can view other people’s activity.
-5. ~~Share photos of workouts~~
+5. ~~Share photos of workouts~~ User can edit their password and change the current weight
 6. Ability to navigate between multiple views.
 7. Ability to view content using any device.
 8. Supports both portrait and landscape mode.
-9. ~~Ability to delete or modify the workout~~
+9. ~~Ability to delete or modify the workout~~ User can set weight goals.
 10. Use modern Android gestures and animations. 
 11. (Bonus) User can view their progress over a certain amount of time
 
