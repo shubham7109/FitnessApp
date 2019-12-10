@@ -1,12 +1,15 @@
 package edu.iastate.bitfitx.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import edu.iastate.bitfitx.Models.UserModel;
@@ -23,8 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
     /**
      * String to save the save the user's email
      */
-    private String username;
-    TextView weight, firstname, lastname;
+    private String username, newWeight;
+    TextView weight, firstname, lastname, email, password;
     DataProvider dp;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class SettingsActivity extends AppCompatActivity {
         username = intent.getStringExtra(LoginActivity.USER);
         firstname = (TextView) findViewById(R.id.first_name);
         lastname = (TextView) findViewById(R.id.last_name);
+        email = (TextView) findViewById(R.id.email_txt);
+        password = (TextView) findViewById(R.id.password_txt);
         weight = (TextView) findViewById(R.id.weight_txt);
 
         dp = DataProvider.getInstance();
@@ -45,6 +50,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onCompleted(UserModel user) {
                 firstname.setText(user.getFirstName());
+                lastname.setText(user.getLastName());
+                email.setText(username);
+                password.setText(user.getPassword());
                 weight.setText(user.getWeight());
             }
             @Override
@@ -54,25 +62,50 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds a new goal weight.
-     * @param view New Goal button that was clicked
+     * Changes a user's weight weight.
+     * @param view Change weight button that was clicked
      */
     public void onChgWeightClicked (View view) {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+        final EditText editText = new EditText(this);
+        alert.setTitle("Change weight");
+        alert.setView(editText);
+
+        alert.setPositiveButton("Change", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                newWeight = editText.getText().toString();
+
+                dp.updateWeight(username, newWeight, new Interfaces.DataProviderCallback() {
+                    @Override
+                    public void onCompleted() {
+                        //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+                        weight.setText(newWeight);
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+
+                    }
+                });
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                newWeight = "";
+            }
+        });
+
+        alert.show();
     }
 
     /**
      * Adds a new goal weight.
-     * @param view New Goal button that was clicked
+     * @param view Change password button that was clicked
      */
     public void onChgPasswordClicked (View view) {
+        //OPTIONAL METHOD
     }
-
-    /**
-     * Adds a new goal weight.
-     * @param view New Goal button that was clicked
-     */
-    public void onNewGoalClicked (View view) {
-    }
-
 }
 

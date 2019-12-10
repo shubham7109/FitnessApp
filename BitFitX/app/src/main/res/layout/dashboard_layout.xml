@@ -37,7 +37,7 @@
                 android:id="@+id/first_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFB700"
+                android:textColor="#371688"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -74,9 +74,9 @@
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/avgCalories_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="250 cal"
                 android:textColor="#371688"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -95,14 +95,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avg time of workout: "
+                android:text="Avg duration of workout: "
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/avgDuration_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="55 mins"
                 android:textColor="#371688"
                 android:textSize="15sp"
                 android:textStyle="bold" />

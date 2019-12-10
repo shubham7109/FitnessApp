@@ -29,8 +29,8 @@ tools:context=".Activities.SettingsActivity">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="User Settings "
-            android:textColor="#000000"
+            android:text="User Settings"
+            android:textColor="@color/black"
             android:textSize="30sp" />
 
     </LinearLayout>
@@ -49,7 +49,7 @@ tools:context=".Activities.SettingsActivity">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="First Name:"
+            android:text="First Name: "
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -191,7 +191,7 @@ tools:context=".Activities.SettingsActivity">
         android:layout_gravity="center"
         android:backgroundTint="#FFC800"
         android:onClick="onChgWeightClicked"
-        android:text="Edit Weight" />
+        android:text="Change Weight" />
 
     <Button
         android:id="@+id/change_password"
@@ -201,15 +201,6 @@ tools:context=".Activities.SettingsActivity">
         android:backgroundTint="#FFC800"
         android:onClick="onChgPasswordClicked"
         android:text="Change Password" />
-
-    <Button
-        android:id="@+id/new_goal"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_gravity="center"
-        android:backgroundTint="#FFC800"
-        android:onClick="onNewGoalClicked"
-        android:text="Set new weight goal" />
 
 
 </LinearLayout>

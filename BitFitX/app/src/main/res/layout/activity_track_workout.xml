@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BECAFF"
     tools:context=".Activities.TrackWorkoutActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,10 +19,12 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="387dp"
-            android:layout_height="29dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingLeft="15dp"
             android:text="@string/type_of_workout"
+            android:textColor="@color/black"
             tools:text="@string/type_of_workout" />
 
         <Spinner
@@ -35,8 +39,10 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="@string/track_your_workout"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +54,7 @@
         android:layout_height="86dp"
         android:gravity="center"
         android:text="@string/_00_00_00"
+        android:textColor="@color/black"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,11 +65,11 @@
         android:layout_width="116dp"
         android:layout_height="80dp"
         android:background="@color/green"
+        android:contentDescription="@string/start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
-        app:srcCompat="@android:drawable/ic_media_play"
-        android:contentDescription="@string/start_button" />
+        app:srcCompat="@android:drawable/ic_media_play" />
 
     <Button
         android:id="@+id/button"

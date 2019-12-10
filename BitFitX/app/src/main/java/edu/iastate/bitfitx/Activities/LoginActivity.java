@@ -34,8 +34,10 @@ public class LoginActivity extends AppCompatActivity {
      * String to store the user's password
      */
      String password;
-
-     SharedPreferences mSharedPreferences;
+    /**
+     * Shared Preferences used to automatically save the user's email
+     */
+    SharedPreferences mSharedPreferences;
     /**
      * String of the user's email that is passed to the dashboard activity.
      */

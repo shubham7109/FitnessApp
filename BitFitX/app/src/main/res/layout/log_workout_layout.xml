@@ -7,15 +7,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#BECAFF"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/log_a_workout"
+            android:textColor="@color/black"
             android:textSize="30sp"
             tools:text="Log a Workout" />
 
@@ -27,15 +29,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Select Date" />
+                android:paddingLeft="15dp"
+                android:text="Select Date"
+                android:textColor="@color/black" />
 
             <DatePicker
                 android:id="@+id/datePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:datePickerMode="spinner"
                 android:calendarViewShown="false"
-                />
+                android:datePickerMode="spinner" />
         </LinearLayout>
 
         <LinearLayout
@@ -48,7 +51,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start Time:" />
+                android:paddingLeft="15dp"
+                android:text="Start Time:"
+                android:textColor="@color/black" />
 
             <TimePicker
                 android:id="@+id/start_picker"
@@ -68,7 +73,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="End Time:  " />
+                android:paddingLeft="15dp"
+                android:text="End Time:  "
+                android:textColor="@color/black" />
 
             <TimePicker
                 android:id="@+id/end_picker"

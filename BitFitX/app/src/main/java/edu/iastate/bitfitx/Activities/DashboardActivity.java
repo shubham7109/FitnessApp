@@ -1,6 +1,7 @@
 package edu.iastate.bitfitx.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
@@ -33,9 +39,9 @@ public class DashboardActivity extends AppCompatActivity {
      * String of the user's email that is passed to the dashboard activity.
      */
     public static final String USER = "email";
-    TextView weight;
-    TextView name;
+    TextView name, weight, avgCal, avgDur;
     DataProvider dp;
+    ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,8 @@ public class DashboardActivity extends AppCompatActivity {
         username = intent.getStringExtra(LoginActivity.USER);
         name = (TextView) findViewById(R.id.first_name);
         weight = (TextView) findViewById(R.id.weight_txt);
+        avgCal = (TextView) findViewById(R.id.avgCalories_txt);
+        avgDur = (TextView) findViewById(R.id.avgDuration_txt);
 
         dp = DataProvider.getInstance();
         setUpNavigationActivities();
@@ -61,6 +69,19 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onError(String msg) { }
 
+        });
+
+        dp.getAllWorkouts(username, new Interfaces.WorkoutlistCallback() {
+            @Override
+            public void onCompleted(ArrayList<WorkoutModel> workouts) {
+                workoutModels = workouts;
+                setStats();
+            }
+
+            @Override
+            public void onError(String msg) {
+                Toast.makeText(DashboardActivity.this, "Error: " + msg, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -128,6 +149,7 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
     }
+
     /**
      * Method to open the Dashboard activity when login is successful. It will pass the user's email to the next activity.
      */
@@ -136,4 +158,26 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    /**
+     * Method to set the user's statistics
+     */
+    public void setStats(){
+
+        int numWorkouts = workoutModels.size();
+        int calories = 0;
+        int time = 0;
+
+        for(WorkoutModel w: workoutModels){
+            calories += w.getCaloriesBurned();
+            time += w.getLengthOfWorkout();
+        }
+
+        String CALORIES = String.format("%d cal",calories/numWorkouts);
+        String TIME = String.format("%d min", TimeUnit.MILLISECONDS.toMinutes(time/numWorkouts));
+
+        avgCal.setText(CALORIES);
+        avgDur.setText(TIME);
+    }
+
 }
