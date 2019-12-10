@@ -54,7 +54,7 @@ public class DatabaseTestActivity extends AppCompatActivity{
     }
 
     private void addWorkoutTest() {
-        dataProvider.addUserWorkout(user.getEmail(), new WorkoutModel("Running", getRandInt(), 4743, 1575504743), new Interfaces.DataProviderCallback() {
+        dataProvider.addUserWorkout(user.getEmail(), new WorkoutModel("Running", "Shubham", getRandInt(), 4743, 1575504743), new Interfaces.DataProviderCallback() {
             @Override
             public void onCompleted() {
                 Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();

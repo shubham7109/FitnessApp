@@ -39,7 +39,13 @@ public class DashboardActivity extends AppCompatActivity {
      * String of the user's email that is passed to the dashboard activity.
      */
     public static final String USER = "email";
+
     TextView name, weight, avgCal, avgDur;
+
+    /**
+     * User object returned from the DP
+     */
+    private UserModel userModel;
     DataProvider dp;
     ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
 
@@ -65,6 +71,7 @@ public class DashboardActivity extends AppCompatActivity {
             public void onCompleted(UserModel user) {
                 name.setText(user.getFirstName());
                 weight.setText(user.getWeight());
+                userModel = user;
             }
             @Override
             public void onError(String msg) { }
@@ -121,7 +128,9 @@ public class DashboardActivity extends AppCompatActivity {
         logWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DashboardActivity.this, LogWorkoutActivity.class));
+                Intent intent = new Intent(DashboardActivity.this, LogWorkoutActivity.class);
+                intent.putExtra("firstName", userModel.getFirstName());
+                startActivity(intent);
             }
         });
 
@@ -129,7 +138,9 @@ public class DashboardActivity extends AppCompatActivity {
         trackWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DashboardActivity.this, TrackWorkoutActivity.class));
+                Intent intent = new Intent(DashboardActivity.this, TrackWorkoutActivity.class);
+                intent.putExtra("firstName", userModel.getFirstName());
+                startActivity(intent);
             }
         });
 
