@@ -16,9 +16,11 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
@@ -47,6 +49,7 @@ public class LogWorkoutActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra(LoginActivity.EMAIL_KEY);
+        firstName = intent.getStringExtra(LoginActivity.NAME_KEY);
 
         dp = DataProvider.getInstance();
         mySpinner = (Spinner) findViewById(R.id.spinner);
@@ -64,14 +67,16 @@ public class LogWorkoutActivity extends AppCompatActivity {
         endPicker = findViewById(R.id.end_picker);
         datePicker = findViewById(R.id.datePicker);
 
-        dp.getUser(username, new Interfaces.UserCallback() {
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
             @Override
-            public void onCompleted(UserModel user) {
-               weight = user.getWeight();
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                weight = (weightModels.get(0).getWeightInPounds());
             }
-            @Override
-            public void onError(String msg) { }
 
+            @Override
+            public void onError(String msg) {
+
+            }
         });
     }
 
@@ -79,7 +84,7 @@ public class LogWorkoutActivity extends AppCompatActivity {
         workoutLength = getWorkoutLength(datePicker, endPicker) - getWorkoutLength(datePicker, startPicker);
         workoutType = mySpinner.getSelectedItem().toString();
         workoutStartTime = getWorkoutLength(datePicker, startPicker) - 43200000;
-        caloriesBurned = TrackWorkoutActivity.calculateCals(workoutType, weight);
+        caloriesBurned = TrackWorkoutActivity.calculateCals(workoutType, weight, workoutLength);
 
         workout = new WorkoutModel(workoutType, firstName, caloriesBurned, workoutLength, workoutStartTime);
 

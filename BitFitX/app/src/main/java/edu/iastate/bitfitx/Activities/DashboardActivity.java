@@ -184,7 +184,9 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DashboardActivity.this, LogWorkoutActivity.class);
-                intent.putExtra("firstName", userModel.getFirstName());
+                intent.putExtra(LoginActivity.EMAIL_KEY, userModel.getEmail());
+                intent.putExtra(LoginActivity.NAME_KEY, userModel.getFirstName());
+
                 startActivity(intent);
             }
         });
@@ -194,7 +196,9 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DashboardActivity.this, TrackWorkoutActivity.class);
-                intent.putExtra("firstName", userModel.getFirstName());
+                intent.putExtra(LoginActivity.EMAIL_KEY, userModel.getEmail());
+                intent.putExtra(LoginActivity.NAME_KEY, userModel.getFirstName());
+
                 startActivity(intent);
             }
         });

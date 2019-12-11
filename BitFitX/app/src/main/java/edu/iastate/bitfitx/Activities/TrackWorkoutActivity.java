@@ -12,8 +12,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import edu.iastate.bitfitx.Models.StopWatchModel;
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
@@ -44,7 +47,7 @@ public class TrackWorkoutActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra(LoginActivity.EMAIL_KEY);
-        firstName = getIntent().getStringExtra("firstName");
+        firstName = intent.getStringExtra(LoginActivity.NAME_KEY);
 
 
         dp = DataProvider.getInstance();
@@ -58,21 +61,22 @@ public class TrackWorkoutActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         mySpinner.setAdapter(adapter);
 
-        firstName = getIntent().getStringExtra("firstName");//This will be needed by the workoutModel
         clockDisplay = findViewById(R.id.clock_textview);
         start = findViewById(R.id.start_button);
         stop = findViewById(R.id.stop_button);
         submitWorkout = findViewById(R.id.submit_workout_button);
         stopWatchModel = new StopWatchModel(this);
 
-        dp.getUser(username, new Interfaces.UserCallback() {
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
             @Override
-            public void onCompleted(UserModel user) {
-                weight = user.getWeight();
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                weight = (weightModels.get(0).getWeightInPounds());
             }
-            @Override
-            public void onError(String msg) { }
 
+            @Override
+            public void onError(String msg) {
+
+            }
         });
 
         setButtonVisibility(false);
@@ -108,7 +112,7 @@ public class TrackWorkoutActivity extends AppCompatActivity {
     public void onSubmitClicked(View view){
         lengthOfWorkout = stopWatchModel.getElapsedTime();
         workoutType = mySpinner.getSelectedItem().toString();
-        caloriesBurned = calculateCals(workoutType, weight);
+        caloriesBurned = calculateCals(workoutType, weight, lengthOfWorkout);
 
         workout = new WorkoutModel(workoutType, firstName, caloriesBurned, lengthOfWorkout, startTime);
 
@@ -132,28 +136,29 @@ public class TrackWorkoutActivity extends AppCompatActivity {
 
     }
 
-    public static long calculateCals(String workoutType, String myWeight){
-        long weight = Long.parseLong(myWeight);
-        if(workoutType == "Running"){
-            return (long) (.0175 * 12.8 * (weight * .45));
+    public static long calculateCals(String workoutType, String myWeight, long lengthOfWorkout){
+        long weight = Long.valueOf(myWeight);
+        lengthOfWorkout = lengthOfWorkout / 60000;
+        if(workoutType.equals("Running")){
+            return (long) (.0175 * 9.8 * (weight * .45)) * lengthOfWorkout;
         }
-        else if (workoutType == "Swimming"){
-            return (long) (.0175 * 8.75 * (weight * .45));
+        else if (workoutType.equals("Swimming")){
+            return (long) (.0175 * 8.75 * (weight * .45)) * lengthOfWorkout;
         }
-        else if (workoutType == "Bicycling"){
-            return (long) (.0175 * 8 * (weight * .45));
+        else if (workoutType.equals("Bicycling")){
+            return (long) (.0175 * 8 * (weight * .45)) * lengthOfWorkout;
         }
-        else if (workoutType == "Cycling(Stationary)"){
-            return (long) (.0175 * 7.7 * (weight * .45));
+        else if (workoutType.equals("Cycling(Stationary)")){
+            return (long) (.0175 * 7.7 * (weight * .45)) * lengthOfWorkout;
         }
-        else if (workoutType == "Walking"){
-            return (long) (.0175 * 4 * (weight * .45));
+        else if (workoutType.equals("Walking")){
+            return (long) (.0175 * 4 * (weight * .45)) * lengthOfWorkout;
         }
-        else if (workoutType == "Calisthenics"){
-            return (long) (.0175 * 6.25 * (weight * .45));
+        else if (workoutType.equals("Calisthenics")){
+            return (long) (.0175 * 6.25 * (weight * .45)) * lengthOfWorkout;
         }
-        else if (workoutType == "Dancing"){
-            return (long) (.0175 * 6 * (weight * .45));
+        else if (workoutType.equals("Dancing")){
+            return (long) (.0175 * 6 * (weight * .45)) * lengthOfWorkout;
         }
         else
             return 0;
