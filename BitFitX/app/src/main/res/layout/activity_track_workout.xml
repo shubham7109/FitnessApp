@@ -49,9 +49,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="230dp"
-        android:layout_height="86dp"
+        android:id="@+id/clock_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/_00_00_00"
         android:textColor="@color/black"
@@ -61,25 +61,40 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <ImageButton
-        android:id="@+id/imageButton6"
+        android:id="@+id/start_button"
         android:layout_width="116dp"
         android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:background="@color/green"
         android:contentDescription="@string/start_button"
+        android:onClick="onStartClicked"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/clock_textview"
         app:srcCompat="@android:drawable/ic_media_play" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submit_workout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFC800"
+        android:onClick="onSubmitClicked"
         android:text="@string/submit_workout"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/stop_button"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:background="@color/crimson"
+        android:onClick="onStopClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_button"
+        app:srcCompat="@android:drawable/ic_media_pause" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
