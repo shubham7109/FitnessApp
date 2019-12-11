@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,6 +26,11 @@ public class RegisterActivity extends AppCompatActivity {
     String password;
     String weight;
 
+    /**
+     * Textview for error message if login is unsuccessful
+     */
+    TextView errorMsg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,9 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText email_txt = (EditText) findViewById(R.id.email_text);
         final EditText password_txt = (EditText) findViewById(R.id.password_text);
         final EditText weight_txt = (EditText) findViewById(R.id.weight_text);
+
+        errorMsg = (TextView) findViewById(R.id.error_text) ;
+        errorMsg.setVisibility(View.INVISIBLE);
 
         Button register = (Button) findViewById(R.id.register_button);
         register.setOnClickListener(new View.OnClickListener() {
@@ -53,12 +62,17 @@ public class RegisterActivity extends AppCompatActivity {
                 dp.addUser(user, new Interfaces.DataProviderCallback() {
                     @Override
                     public void onCompleted() {
-                        //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
-                        openLogin();
+                        if (firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || weight.equals("")) {
+                            onError("Incorrect Password");
+                        }
+                        else{
+                            openLogin();
+                        }
                     }
 
                     @Override
                     public void onError(String msg) {
+                        errorMsg.setVisibility(View.VISIBLE);
                     }
                 });
             }

@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
      * String to save the save the user's email
      */
     private String username, newWeight, goalWeight;
-    TextView weight, firstname, lastname, email, password;
+    TextView weight, firstname, lastname, email;
     /**
      * Instance of dataProvider
      */
@@ -49,7 +49,6 @@ public class SettingsActivity extends AppCompatActivity {
         firstname = (TextView) findViewById(R.id.first_name);
         lastname = (TextView) findViewById(R.id.last_name);
         email = (TextView) findViewById(R.id.email_txt);
-        password = (TextView) findViewById(R.id.password_txt);
         weight = (TextView) findViewById(R.id.weight_txt);
 
         dp = DataProvider.getInstance();
@@ -62,7 +61,6 @@ public class SettingsActivity extends AppCompatActivity {
                 firstname.setText(user.getFirstName());
                 lastname.setText(user.getLastName());
                 email.setText(username);
-                password.setText(user.getPassword());
             }
             @Override
             public void onError(String msg) { }
