@@ -8,8 +8,9 @@ public class UserModel {
     private String lastName;
     private String email;
     private String password;
-    private String weight;
+    private ArrayList<WeightModel> weightModelArrayList;
     private ArrayList<WorkoutModel> workoutList;
+    private String weight;
 
     public UserModel(String firstName, String lastName, String email, String password, String weight) {
         this.firstName = firstName;
@@ -17,15 +18,13 @@ public class UserModel {
         this.email = email;
         this.password = password;
         this.weight = weight;
+        weightModelArrayList = new ArrayList<>();
+        weightModelArrayList.add(new WeightModel(weight,System.currentTimeMillis()));
         workoutList = new ArrayList<>();
     }
 
-    public void setWorkoutList(ArrayList<WorkoutModel> workoutList) {
-        this.workoutList = workoutList;
-    }
-
-    public void addWorkout(WorkoutModel workoutModel){
-        workoutList.add(workoutModel);
+    public void setWeightModelArrayList(ArrayList<WeightModel> weightModelArrayList) {
+        this.weightModelArrayList = weightModelArrayList;
     }
 
     public String getWeight() {
@@ -34,6 +33,18 @@ public class UserModel {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public ArrayList<WeightModel> getWeightModelArrayList() {
+        return weightModelArrayList;
+    }
+
+    public void setWorkoutList(ArrayList<WorkoutModel> workoutList) {
+        this.workoutList = workoutList;
+    }
+
+    public void addWorkout(WorkoutModel workoutModel){
+        workoutList.add(workoutModel);
     }
 
     public ArrayList<WorkoutModel> getWorkoutList() {

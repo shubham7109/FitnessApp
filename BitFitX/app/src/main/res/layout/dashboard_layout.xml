@@ -156,12 +156,23 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/weight_txt"
+                    android:id="@+id/goal_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#371688"
                     android:textSize="15sp"
                     android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/weight_graph"
+                    android:onClick="weightGraphClick"
+                    android:background="@drawable/round_shape_btn"
+                    android:backgroundTint="#FFC800"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:text="View weight graph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

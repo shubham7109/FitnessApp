@@ -220,4 +220,8 @@ public class DashboardActivity extends AppCompatActivity {
         avgDur.setText(TIME);
     }
 
+    public void weightGraphClick(View view) {
+        Intent intent = new Intent(this, WeightGraphActivity.class);
+        startActivity(intent);
+    }
 }

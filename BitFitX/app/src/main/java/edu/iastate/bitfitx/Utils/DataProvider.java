@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.Map;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 
 /**
@@ -45,7 +46,7 @@ public class DataProvider extends Interfaces {
      * Adds the user to the DB
      * @param modelUser The model user to add
      */
-    public void addUser(UserModel modelUser, final DataProviderCallback dataProviderCallback){
+    public void addUser(final UserModel modelUser, final DataProviderCallback dataProviderCallback){
         WriteBatch batch = db.batch();
 
         DocumentReference donationRef = db.collection("users").document(modelUser.getEmail());
@@ -56,11 +57,39 @@ public class DataProvider extends Interfaces {
             batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-                    dataProviderCallback.onCompleted();
+                    addUserWeight(modelUser.getEmail(), modelUser.getWeight(), new DataProviderCallback() {
+                        @Override
+                        public void onCompleted() {
+                            dataProviderCallback.onCompleted();
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            dataProviderCallback.onError(msg);
+                        }
+                    });
                 }
             });
         }catch (Exception e){
             dataProviderCallback.onError("Error adding document" + e.getMessage());
+        }
+    }
+
+    public void addUserWeight(String emailID, String weight, final DataProviderCallback callback) {
+        WriteBatch batch = db.batch();
+        DocumentReference donationRef = db.collection("users").document(emailID).collection("weights").document();
+        batch.set(donationRef, new WeightModel(weight,System.currentTimeMillis()));
+
+        // Commit the batch
+        try{
+            batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    callback.onCompleted();
+                }
+            });
+        }catch (Exception e){
+            callback.onError("Error adding document" + e.getMessage());
         }
     }
 
@@ -80,34 +109,6 @@ public class DataProvider extends Interfaces {
         }catch (Exception e){
             callback.onError("Error adding document" + e.getMessage());
         }
-    }
-
-
-    public void updateWeight(String emailID, final String weightInLbs, final DataProviderCallback callback){
-    getUser(emailID, new UserCallback() {
-        @Override
-        public void onCompleted(UserModel user) {
-            user.setWeight(weightInLbs); //Weight has now been updated
-            addUser(user, new DataProviderCallback() {
-                @Override
-                public void onCompleted() {
-                    callback.onCompleted();
-                }
-
-                @Override
-                public void onError(String msg) {
-                    callback.onError(msg);
-                }
-            });
-
-        }
-
-        @Override
-        public void onError(String msg) {
-
-        }
-    });
-
     }
 
     /**
@@ -227,6 +228,44 @@ public class DataProvider extends Interfaces {
 
 
                             callback.onCompleted(workoutModels);
+                        } else {
+                            callback.onError("Error getting user: " + task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+
+    public void getUsersWeight(String emailID, final WeightListCallback callback){
+        db.collection("users")
+                .document(emailID)
+                .collection("weights")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<WeightModel> weightModels = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("MSG", document.getId() + " => " + document.getData());
+                                Map data = document.getData();
+                                WeightModel weightModel = new WeightModel(
+                                        data.get("weightInPounds").toString(),
+                                        Long.valueOf(data.get("timeInMillis").toString()));
+                                weightModels.add(weightModel);
+                            }
+
+
+                            Collections.sort(weightModels, new Comparator<WeightModel>() {
+                                @Override
+                                public int compare(WeightModel workoutModel, WeightModel t1) {
+                                    return Long.compare(workoutModel.getTimeInMillis(), t1.getTimeInMillis());
+                                }
+                            });
+                            Collections.reverse(weightModels);
+
+
+                            callback.onCompleted(weightModels);
                         } else {
                             callback.onError("Error getting user: " + task.getException().getMessage());
                         }

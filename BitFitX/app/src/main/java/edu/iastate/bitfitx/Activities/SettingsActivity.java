@@ -79,7 +79,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 newWeight = editText.getText().toString();
 
-                dp.updateWeight(username, newWeight, new Interfaces.DataProviderCallback() {
+                dp.addUserWeight(username, newWeight, new Interfaces.DataProviderCallback() {
                     @Override
                     public void onCompleted() {
                         //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
