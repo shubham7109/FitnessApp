@@ -12,7 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
@@ -56,11 +59,23 @@ public class SettingsActivity extends AppCompatActivity {
                 lastname.setText(user.getLastName());
                 email.setText(username);
                 password.setText(user.getPassword());
-                weight.setText(user.getWeight());
+
             }
             @Override
             public void onError(String msg) { }
 
+        });
+
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
+            @Override
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                weight.setText(weightModels.get(0).getWeightInPounds());
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
         });
     }
 

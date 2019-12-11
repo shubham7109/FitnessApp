@@ -13,8 +13,16 @@
 
         <com.jjoe64.graphview.GraphView
             android:layout_width="match_parent"
-            android:layout_height="200dip"
+            android:layout_height="250dip"
+            android:layout_margin="10dp"
             android:id="@+id/graph" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/workout_history_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
 
     </LinearLayout>
 
