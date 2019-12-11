@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
@@ -84,12 +85,22 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onCompleted(UserModel user) {
                 name.setText(user.getFirstName());
-                weight.setText(user.getWeight()+" lbs");
                 userModel = user;
             }
             @Override
             public void onError(String msg) { }
+        });
 
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
+            @Override
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                weight.setText(weightModels.get(0).getWeightInPounds()+" lbs");
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
         });
 
         dp.getUsersWorkouts(username, new Interfaces.WorkoutlistCallback() {
@@ -108,15 +119,16 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     protected void onResume(){
-        dp.getUser(username, new Interfaces.UserCallback() {
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
             @Override
-            public void onCompleted(UserModel user) {
-                weight.setText(user.getWeight()+" lbs");
-                userModel = user;
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                    weight.setText(weightModels.get(0).getWeightInPounds()+" lbs");
             }
-            @Override
-            public void onError(String msg) { }
 
+            @Override
+            public void onError(String msg) {
+
+            }
         });
 
         dp.getUsersWorkouts(username, new Interfaces.WorkoutlistCallback() {
@@ -242,4 +254,8 @@ public class DashboardActivity extends AppCompatActivity {
         avgDur.setText(TIME);
     }
 
+    public void weightGraphClick(View view) {
+        Intent intent = new Intent(this, WeightGraphActivity.class);
+        startActivity(intent);
+    }
 }

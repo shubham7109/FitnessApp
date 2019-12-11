@@ -11,10 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
-import com.google.firebase.firestore.auth.User;
-
-import org.w3c.dom.Text;
-
 import edu.iastate.bitfitx.Models.UserModel;
 
 import edu.iastate.bitfitx.R;
@@ -45,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
      * Instance of dataProvider
      */
     DataProvider dp;
+    /**
+     * Textview for error message if login is unsuccessful
+     */
     TextView errorMsg;
 
     //True, when we need to run tests for the database
