@@ -209,8 +209,7 @@ tools:context=".Activities.SettingsActivity">
         android:layout_gravity="center"
         android:backgroundTint="#FFC800"
         android:onClick="onNewGoal"
-        android:text="Change Password"
-        tools:text="Set new weight goal" />
+        android:text="Set new weight goal" />
 
 
 </LinearLayout>

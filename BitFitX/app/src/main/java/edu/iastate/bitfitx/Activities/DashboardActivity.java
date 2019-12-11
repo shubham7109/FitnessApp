@@ -33,9 +33,17 @@ public class DashboardActivity extends AppCompatActivity {
      */
     private String username;
     /**
+     * String to save the save the user's current weight and their goal weight
+     */
+    private String currentWeight, goalWeight;
+    /**
      * String of the user's email that is passed from the login page.
      */
     public static final String EMAIL_KEY = "email";
+    /**
+     * String of email_goal to keep track of the user's goal weight in shared preferences
+     */
+    public String GOAL_KEY = "";
     /**
      * Textview of user's statistics to be displayed on the dashboard
      */
@@ -64,10 +72,11 @@ public class DashboardActivity extends AppCompatActivity {
         weight = (TextView) findViewById(R.id.weight_txt);
         avgCal = (TextView) findViewById(R.id.avgCalories_txt);
         avgDur = (TextView) findViewById(R.id.avgDuration_txt);
-        goal = (TextView) findViewById(R.id.weight_txt);
+        goal = (TextView) findViewById(R.id.goal_txt);
 
         dp = DataProvider.getInstance();
         setUpNavigationActivities();
+        GOAL_KEY = username+"_goal";
 
         mSharedPreferences = getSharedPreferences(LoginActivity.PACKAGE_NAME, Context.MODE_PRIVATE);
 
@@ -75,7 +84,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onCompleted(UserModel user) {
                 name.setText(user.getFirstName());
-                weight.setText(user.getWeight());
+                weight.setText(user.getWeight()+" lbs");
                 userModel = user;
             }
             @Override
@@ -102,14 +111,27 @@ public class DashboardActivity extends AppCompatActivity {
         dp.getUser(username, new Interfaces.UserCallback() {
             @Override
             public void onCompleted(UserModel user) {
-                //name.setText(user.getFirstName());
-                weight.setText(user.getWeight());
+                weight.setText(user.getWeight()+" lbs");
                 userModel = user;
             }
             @Override
             public void onError(String msg) { }
 
         });
+
+        dp.getUsersWorkouts(username, new Interfaces.WorkoutlistCallback() {
+            @Override
+            public void onCompleted(ArrayList<WorkoutModel> workouts) {
+                workoutModels = workouts;
+                setStats();
+            }
+
+            @Override
+            public void onError(String msg) {
+                Toast.makeText(DashboardActivity.this, "Error: " + msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         super.onResume();
     }
 

@@ -79,16 +79,13 @@
             android:layout_height="10dp" />
 
         <EditText
-            android:id="@+id/weight_text"
+            android:id="@+id/weight_txt"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="#7187EE"
-            android:ems="10"
-            android:hint="weight in lbs"
-            android:inputType="textPassword"
+            android:hint="weight"
             android:paddingLeft="25dp"
-            android:numeric="integer"
             android:textSize="24sp" />
 
         <Space

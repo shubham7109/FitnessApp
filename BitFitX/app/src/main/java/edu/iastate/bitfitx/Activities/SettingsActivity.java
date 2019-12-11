@@ -26,12 +26,16 @@ public class SettingsActivity extends AppCompatActivity {
     /**
      * String to save the save the user's email
      */
-    private String username, newWeight;
+    private String username, newWeight, goalWeight;
     TextView weight, firstname, lastname, email, password;
     /**
      * Instance of dataProvider
      */
     DataProvider dp;
+    /**
+     * String of email_goal to keep track of the user's goal weight in shared preferences
+     */
+    public String GOAL_KEY = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         weight = (TextView) findViewById(R.id.weight_txt);
 
         dp = DataProvider.getInstance();
-
+        GOAL_KEY = username+"_goal";
         mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
         dp.getUser(username, new Interfaces.UserCallback() {
@@ -56,7 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
                 lastname.setText(user.getLastName());
                 email.setText(username);
                 password.setText(user.getPassword());
-                weight.setText(user.getWeight());
+                weight.setText(user.getWeight()+" lbs");
             }
             @Override
             public void onError(String msg) { }
@@ -108,7 +112,38 @@ public class SettingsActivity extends AppCompatActivity {
      * @param view New Goal button that was clicked
      */
     public void onNewGoal (View view) {
-        //mSharedPreferences.edit().putString(EMAIL_KEY, email).commit();
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+        final EditText editText = new EditText(this);
+        alert.setTitle("Set new weight goal");
+        alert.setView(editText);
+
+        alert.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                goalWeight = editText.getText().toString();
+
+                dp.updateWeight(username, newWeight, new Interfaces.DataProviderCallback() {
+                    @Override
+                    public void onCompleted() {
+                        //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+                        //mSharedPreferences.edit().putString(GOAL_KEY, goalWeight).commit();
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+
+                    }
+                });
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                goalWeight = "";
+            }
+        });
+
+        alert.show();
     }
 
     /**

@@ -75,6 +75,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#FFC800"
         android:text="@string/submit_workout"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

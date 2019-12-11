@@ -97,6 +97,7 @@
                 android:layout_height="29dp"
                 android:layout_weight="1"
                 android:text="@string/type_of_workout"
+                android:textColor="@color/black"
                 tools:text="@string/type_of_workout" />
 
             <Spinner
@@ -111,6 +112,7 @@
             android:id="@+id/add_workout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFC800"
             android:onClick="onAddWorkoutButtonClicked"
             android:text="@string/add_workout" />
 
