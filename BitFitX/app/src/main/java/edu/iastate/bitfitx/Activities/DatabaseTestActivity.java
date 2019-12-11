@@ -66,7 +66,7 @@ public class DatabaseTestActivity extends AppCompatActivity{
     }
 
     private void updateUserWeightTest() {
-        dataProvider.updateWeight(user.getEmail(), "69", new Interfaces.DataProviderCallback() {
+        dataProvider.addUserWeight(user.getEmail(), "69", new Interfaces.DataProviderCallback() {
             @Override
             public void onCompleted() {
                 //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();

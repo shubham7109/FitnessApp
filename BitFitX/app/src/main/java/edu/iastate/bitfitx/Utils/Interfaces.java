@@ -3,6 +3,7 @@ package edu.iastate.bitfitx.Utils;
 import java.util.ArrayList;
 
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 
 public class Interfaces {
@@ -24,6 +25,12 @@ public class Interfaces {
 
     public interface WorkoutlistCallback{
         public void onCompleted(ArrayList<WorkoutModel> workouts);
+        public void onError(String msg);
+    }
+
+
+    public interface WeightListCallback{
+        public void onCompleted(ArrayList<WeightModel> weightModels);
         public void onError(String msg);
     }
 

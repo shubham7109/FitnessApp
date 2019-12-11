@@ -163,6 +163,20 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/weight_graph"
+                    android:onClick="weightGraphClick"
+                    android:background="@drawable/round_shape_btn"
+                    android:backgroundTint="@color/light_salmon"
+                    android:textAllCaps="false"
+                    android:textSize="12dp"
+                    android:padding="5dp"
+                    android:layout_marginStart="25dp"
+                    android:textColor="@color/black"
+                    android:text="View weight graph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <include layout="@layout/divider" />

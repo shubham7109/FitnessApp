@@ -12,7 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
@@ -60,11 +63,22 @@ public class SettingsActivity extends AppCompatActivity {
                 lastname.setText(user.getLastName());
                 email.setText(username);
                 password.setText(user.getPassword());
-                weight.setText(user.getWeight()+" lbs");
             }
             @Override
             public void onError(String msg) { }
 
+        });
+
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
+            @Override
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                weight.setText(weightModels.get(0).getWeightInPounds()+" lbs");
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
         });
     }
 
@@ -83,11 +97,11 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 newWeight = editText.getText().toString();
 
-                dp.updateWeight(username, newWeight, new Interfaces.DataProviderCallback() {
+                dp.addUserWeight(username, newWeight, new Interfaces.DataProviderCallback() {
                     @Override
                     public void onCompleted() {
                         //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
-                        weight.setText(newWeight);
+                        weight.setText(newWeight+ " lbs");
                     }
 
                     @Override
@@ -122,7 +136,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 goalWeight = editText.getText().toString();
 
-                dp.updateWeight(username, newWeight, new Interfaces.DataProviderCallback() {
+                dp.addUserWeight(username, newWeight, new Interfaces.DataProviderCallback() {
                     @Override
                     public void onCompleted() {
                         //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
