@@ -9,7 +9,11 @@
     <string-array name="workout_array">
         <item>Running</item>
         <item>Swimming</item>
-        <item>Lifting Weights</item>
+        <item>Bicycling</item>
+        <item>Cycling(Stationary)</item>
+        <item>Walking</item>
+        <item>Calisthenics</item>
+        <item>Dancing</item>
     </string-array>
     <string name="title_activity_login">Sign in</string>
     <string name="prompt_email">Email</string>

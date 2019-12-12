@@ -19,6 +19,7 @@ import edu.iastate.bitfitx.Utils.Interfaces;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final String NAME_KEY = "firstName";
     /**
      * String of the user's email that is saved in SharedPreferences and passed to the dashboard activity.
      */

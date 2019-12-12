@@ -3,6 +3,7 @@ package edu.iastate.bitfitx.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,8 +16,11 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
+import edu.iastate.bitfitx.Models.UserModel;
+import edu.iastate.bitfitx.Models.WeightModel;
 import edu.iastate.bitfitx.Models.WorkoutModel;
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
@@ -35,11 +39,17 @@ public class LogWorkoutActivity extends AppCompatActivity {
     TimePicker endPicker;
     DatePicker datePicker;
     private String firstName;
+    String username;
+    String weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_workout_layout);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra(LoginActivity.EMAIL_KEY);
+        firstName = intent.getStringExtra(LoginActivity.NAME_KEY);
 
         dp = DataProvider.getInstance();
         mySpinner = (Spinner) findViewById(R.id.spinner);
@@ -56,13 +66,25 @@ public class LogWorkoutActivity extends AppCompatActivity {
         startPicker = findViewById(R.id.start_picker);
         endPicker = findViewById(R.id.end_picker);
         datePicker = findViewById(R.id.datePicker);
+
+        dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
+            @Override
+            public void onCompleted(ArrayList<WeightModel> weightModels) {
+                weight = (weightModels.get(0).getWeightInPounds());
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
     }
 
     public void onAddWorkoutButtonClicked(View view){
         workoutLength = getWorkoutLength(datePicker, endPicker) - getWorkoutLength(datePicker, startPicker);
         workoutType = mySpinner.getSelectedItem().toString();
         workoutStartTime = getWorkoutLength(datePicker, startPicker) - 43200000;
-        caloriesBurned = 100;
+        caloriesBurned = TrackWorkoutActivity.calculateCals(workoutType, weight, workoutLength);
 
         workout = new WorkoutModel(workoutType, firstName, caloriesBurned, workoutLength, workoutStartTime);
 
