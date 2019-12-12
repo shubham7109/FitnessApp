@@ -111,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onRegisterClicked (View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_to_top, R.anim.slide_from_bottom);
+
     }
 
     /**

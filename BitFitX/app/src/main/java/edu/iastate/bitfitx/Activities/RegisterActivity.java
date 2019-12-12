@@ -1,6 +1,5 @@
 package edu.iastate.bitfitx.Activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import edu.iastate.bitfitx.Models.UserModel;
 import edu.iastate.bitfitx.R;
@@ -57,24 +55,28 @@ public class RegisterActivity extends AppCompatActivity {
                 password = password_txt.getText().toString();
                 weight = weight_txt.getText().toString();
 
-                user = new UserModel(firstName, lastName, email, password,weight);
-                dp = new DataProvider();
-                dp.addUser(user, new Interfaces.DataProviderCallback() {
-                    @Override
-                    public void onCompleted() {
-                        if (firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || weight.equals("")) {
-                            onError("Incorrect Password");
+                if (firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || weight.equals("")) {
+                    errorMsg.setVisibility(View.VISIBLE);
+                }
+                else {
+                    user = new UserModel(firstName, lastName, email, password, weight);
+                    dp = new DataProvider();
+                    dp.addUser(user, new Interfaces.DataProviderCallback() {
+                        @Override
+                        public void onCompleted() {
+                            if (firstName.equals("") || lastName.equals("") || email.equals("") || password.equals("") || weight.equals("")) {
+                                onError("Incorrect Password");
+                            } else {
+                                openLogin();
+                            }
                         }
-                        else{
-                            openLogin();
-                        }
-                    }
 
-                    @Override
-                    public void onError(String msg) {
-                        errorMsg.setVisibility(View.VISIBLE);
-                    }
-                });
+                        @Override
+                        public void onError(String msg) {
+                            errorMsg.setVisibility(View.VISIBLE);
+                        }
+                    });
+                }
             }
         });
 
@@ -85,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
     public void openLogin(){
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-        finish();
-    }
-
+        overridePendingTransition(R.anim.slide_to_bottom, R.anim.slide_from_top);
+    } 
 }
