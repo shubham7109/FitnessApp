@@ -143,7 +143,7 @@ public class WeightGraphActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             WeightModel weightModel = weightModels.get(position);
             Date date = new Date(weightModel.getTimeInMillis());
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             format.setTimeZone(TimeZone.getDefault());
 
             holder.weight.setText(weightModel.getWeightInPounds() + "lbs");

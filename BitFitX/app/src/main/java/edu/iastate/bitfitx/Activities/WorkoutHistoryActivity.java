@@ -83,7 +83,7 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             WorkoutModel workoutModel = workoutModels.get(position);
             Date date = new Date(workoutModel.getWorkoutStartTime());
-            DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            DateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             format.setTimeZone(TimeZone.getDefault());
 
             @SuppressLint("DefaultLocale") String lengthString = String.format("%d min",TimeUnit.MILLISECONDS.toMinutes(workoutModel.getLengthOfWorkout()));
