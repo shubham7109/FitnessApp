@@ -120,6 +120,7 @@ public class WeightGraphActivity extends AppCompatActivity {
         graph.getViewport().setMinX(new Date(weightModels.get(0).getTimeInMillis()).getTime());
         graph.getViewport().setMaxX(new Date(weightModels.get(weightModels.size()-1).getTimeInMillis()).getTime());
         graph.getViewport().setXAxisBoundsManual(true);
+        graph.getGridLabelRenderer().setNumHorizontalLabels(0);
     }
 
 
