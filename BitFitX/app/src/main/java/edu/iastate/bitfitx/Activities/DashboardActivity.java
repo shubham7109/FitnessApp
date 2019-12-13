@@ -226,6 +226,7 @@ public class DashboardActivity extends AppCompatActivity {
     public void openLogin(){
         Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
         finish();
     }
 
