@@ -39,6 +39,10 @@ public class RegisterActivity extends AppCompatActivity {
      * Textview for error message if login is unsuccessful
      */
     TextView errorMsg;
+    /**
+     * String of the user's email that is saved in SharedPreferences and passed to the dashboard activity.
+     */
+    public static String EMAIL_KEY = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         dp = DataProvider.getInstance();
-        mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
-
+       // mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
         final EditText first_txt = (EditText) findViewById(R.id.firstname_text);
         final EditText last_txt = (EditText) findViewById(R.id.lastname_text);
