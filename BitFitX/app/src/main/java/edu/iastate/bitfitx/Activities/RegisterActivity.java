@@ -1,6 +1,8 @@
 package edu.iastate.bitfitx.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,13 +19,22 @@ import edu.iastate.bitfitx.Utils.Interfaces;
 public class RegisterActivity extends AppCompatActivity {
 
     UserModel user;
+    /**
+     * Instance of dataProvider
+     */
     DataProvider dp;
-    String firstName;
-    String lastName;
-    String email;
-    String password;
-    String weight;
-
+    /**
+     * Strings to store the user's statistics to be displayed on the dashboard
+     */
+    String firstName, lastName, email, password, weight;
+    /**
+     * String of the package name
+     */
+    public static String PACKAGE_NAME = "edu.iastate.bitfitx";
+    /**
+     * Shared Preferences used to automatically save the user's email
+     */
+    SharedPreferences mSharedPreferences;
     /**
      * Textview for error message if login is unsuccessful
      */
@@ -35,6 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         dp = DataProvider.getInstance();
+        mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
+
 
         final EditText first_txt = (EditText) findViewById(R.id.firstname_text);
         final EditText last_txt = (EditText) findViewById(R.id.lastname_text);
@@ -85,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
      * Method to open the Dashboard activity when login is successful. It will pass the user's email to the next activity.
      */
     public void openLogin(){
+        mSharedPreferences.edit().putString(EMAIL_KEY, email).commit();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_to_bottom, R.anim.slide_from_top);

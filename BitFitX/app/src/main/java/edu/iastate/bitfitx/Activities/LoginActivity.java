@@ -10,22 +10,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.SharedPreferences;
-
 import edu.iastate.bitfitx.Models.UserModel;
-
 import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
 public class LoginActivity extends AppCompatActivity {
 
+    /**
+     * String of the user's first name that is saved in  SharedPreferences and passed to the dashboard activity.
+     */
     public static final String NAME_KEY = "firstName";
     /**
      * String of the user's email that is saved in SharedPreferences and passed to the dashboard activity.
      */
     public static String EMAIL_KEY = "email";
+    /**
+     * String of the package name
+     */
     public static String PACKAGE_NAME = "edu.iastate.bitfitx";
-
     /**
      * String to store the user's email
      */
@@ -69,12 +72,13 @@ public class LoginActivity extends AppCompatActivity {
             openDashboard(mSharedPreferences.getString(EMAIL_KEY, null));
         }
 
-
+        //Sets up the text edit views and error message
         final EditText email_txt = (EditText) findViewById(R.id.email_text);
         final EditText password_txt = (EditText) findViewById(R.id.password_text);
         errorMsg = (TextView) findViewById(R.id.error_txt) ;
         errorMsg.setVisibility(View.INVISIBLE);
 
+        //when login button is clicked, checks the database to see if username and password are correct.
         Button login = (Button) findViewById(R.id.login_button);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,18 +110,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds a new list to the LiveData container from the user input text.
+     * Changes activity to the Register Activity page
      * @param view Register button that was clicked
      */
     public void onRegisterClicked (View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_to_top, R.anim.slide_from_bottom);
-
     }
 
     /**
-     * Method to open the Dashboard activity when login is successful. It will pass the user's email to the next activity.
+     * If the username and password are correct, changes activity to the Dashboard Activity page
      * @param String The user's email
      */
     public void openDashboard(String email){
@@ -127,5 +130,4 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
         finish();
     }
-
 }

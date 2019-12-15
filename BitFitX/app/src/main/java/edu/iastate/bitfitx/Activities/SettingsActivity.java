@@ -30,6 +30,9 @@ public class SettingsActivity extends AppCompatActivity {
      * String to save the save the user's email
      */
     private String username, newWeight, goalWeight;
+    /**
+     * Textview to display the user's stats
+     */
     TextView weight, firstname, lastname, email;
     /**
      * Instance of dataProvider
