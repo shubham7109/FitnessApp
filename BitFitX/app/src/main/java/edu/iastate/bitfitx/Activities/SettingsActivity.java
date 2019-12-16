@@ -122,51 +122,43 @@ public class SettingsActivity extends AppCompatActivity {
         alert.show();
     }
 
-    /**
-     * Adds a new goal weight.
-     * @param view New Goal button that was clicked
-     */
-    public void onNewGoal (View view) {
-
-        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
-        final EditText editText = new EditText(this);
-        alert.setTitle("Set new weight goal");
-        alert.setView(editText);
-
-        alert.setPositiveButton("Set", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                goalWeight = editText.getText().toString();
-
-                dp.addUserWeight(username, newWeight, new Interfaces.DataProviderCallback() {
-                    @Override
-                    public void onCompleted() {
-                        //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
-                        //mSharedPreferences.edit().putString(GOAL_KEY, goalWeight).commit();
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-
-                    }
-                });
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                goalWeight = "";
-            }
-        });
-
-        alert.show();
-    }
-
-    /**
-     * Changes the user's current password.
-     * @param view Change password button that was clicked
-     */
-    public void onChgPasswordClicked (View view) {
-        //OPTIONAL METHOD
-    }
+//    /**
+//     * Adds a new goal weight.
+//     * @param view New Goal button that was clicked
+//     */
+//    public void onNewGoal (View view) {
+//
+//        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+//        final EditText editText = new EditText(this);
+//        alert.setTitle("Set new weight goal");
+//        alert.setView(editText);
+//
+//        alert.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                goalWeight = editText.getText().toString();
+//
+//                dp.addUserWeight(username, newWeight, new Interfaces.DataProviderCallback() {
+//                    @Override
+//                    public void onCompleted() {
+//                        //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+//                        //mSharedPreferences.edit().putString(GOAL_KEY, goalWeight).commit();
+//                    }
+//
+//                    @Override
+//                    public void onError(String msg) {
+//
+//                    }
+//                });
+//            }
+//        });
+//
+//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            public void onClick(DialogInterface dialog, int whichButton) {
+//                goalWeight = "";
+//            }
+//        });
+//
+//        alert.show();
+//    }
 }
 

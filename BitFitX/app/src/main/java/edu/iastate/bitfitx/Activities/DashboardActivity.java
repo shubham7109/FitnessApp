@@ -122,7 +122,7 @@ public class DashboardActivity extends AppCompatActivity {
         dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
             @Override
             public void onCompleted(ArrayList<WeightModel> weightModels) {
-                    weight.setText(weightModels.get(0).getWeightInPounds()+" lbs");
+                weight.setText(weightModels.get(0).getWeightInPounds()+" lbs");
             }
 
             @Override
@@ -174,8 +174,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     /**
-     * This method sets up all the buttons
-     * and the activity navigation on button click.
+     * This method sets up all the buttons and the activity navigation on button click.
      */
     private void setUpNavigationActivities() {
 
@@ -220,7 +219,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     /**
-     * Method to open the Dashboard activity when login is successful. It will pass the user's email to the next activity.
+     * Method to open the login activity when logout is selected from the settings.
      */
     public void openLogin(){
         Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
@@ -258,6 +257,10 @@ public class DashboardActivity extends AppCompatActivity {
         avgDur.setText(TIME);
     }
 
+    /**
+     * Opens the weight graph activity
+     * @param view View weight graph button that was clicked
+     */
     public void weightGraphClick(View view) {
         Intent intent = new Intent(this, WeightGraphActivity.class);
         startActivity(intent);
