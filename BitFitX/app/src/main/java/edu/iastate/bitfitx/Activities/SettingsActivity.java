@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,7 +57,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         dp = DataProvider.getInstance();
         GOAL_KEY = username+"_goal";
-        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        mSharedPreferences = getSharedPreferences(LoginActivity.PACKAGE_NAME, Context.MODE_PRIVATE);
 
         dp.getUser(username, new Interfaces.UserCallback() {
             @Override
@@ -122,43 +123,31 @@ public class SettingsActivity extends AppCompatActivity {
         alert.show();
     }
 
-//    /**
-//     * Adds a new goal weight.
-//     * @param view New Goal button that was clicked
-//     */
-//    public void onNewGoal (View view) {
-//
-//        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
-//        final EditText editText = new EditText(this);
-//        alert.setTitle("Set new weight goal");
-//        alert.setView(editText);
-//
-//        alert.setPositiveButton("Set", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                goalWeight = editText.getText().toString();
-//
-//                dp.addUserWeight(username, newWeight, new Interfaces.DataProviderCallback() {
-//                    @Override
-//                    public void onCompleted() {
-//                        //Toast.makeText(DatabaseTestActivity.this, "Completed", Toast.LENGTH_SHORT).show();
-//                        //mSharedPreferences.edit().putString(GOAL_KEY, goalWeight).commit();
-//                    }
-//
-//                    @Override
-//                    public void onError(String msg) {
-//
-//                    }
-//                });
-//            }
-//        });
-//
-//        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int whichButton) {
-//                goalWeight = "";
-//            }
-//        });
-//
-//        alert.show();
-//    }
+    /**
+     * Adds a new goal weight.
+     * @param view New Goal button that was clicked
+     */
+    public void onNewGoal (View view) {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+        final EditText editText = new EditText(this);
+        alert.setTitle("Set new weight goal");
+        alert.setView(editText);
+
+        alert.setPositiveButton("Set", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                goalWeight = editText.getText().toString();
+                mSharedPreferences.edit().putString(GOAL_KEY, goalWeight).commit();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                goalWeight = "";
+            }
+        });
+
+        alert.show();
+    }
 }
 
