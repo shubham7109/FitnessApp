@@ -12,7 +12,7 @@
         <activity android:name=".Activities.WeightGraphActivity"></activity>
         <activity android:name=".Activities.WorkoutHistoryActivity" />
         <activity android:name=".Activities.CommunityListActivity" />
-        <activity android:name=".Activities.TrackWorkoutActivity" />
+        <activity android:name=".Activities.TrackWorkoutActivity" android:configChanges="orientation|screenSize"/>
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.LogWorkoutActivity" />
         <activity android:name=".Activities.DashboardActivity" />
