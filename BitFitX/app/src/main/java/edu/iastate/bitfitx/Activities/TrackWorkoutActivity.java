@@ -22,23 +22,50 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity allows a User to track a workout by selecting a type of workout and using a timer
+ */
 public class TrackWorkoutActivity extends AppCompatActivity {
-
+    /**
+     * A Private String for the firstname of the user
+     */
     private String firstName;
+    /**
+     * an instance of the StopWatch model
+     */
     private StopWatchModel stopWatchModel;
+    /**
+     * An instance of the DataProvider
+     */
     DataProvider dp;
+    /**
+     * An instance of the WorkoutModel
+     */
     WorkoutModel workout;
-    String username;
+    /**
+     * strings for the username, workoutType, and weight of the user
+     */
+    String username, workoutType, weight;
+    /**
+     * A Textview for the clock
+     */
     TextView clockDisplay;
-    ImageButton start;
-    ImageButton stop;
+    /**
+     * ImageButtons for Starting and stopping the timer
+     */
+    ImageButton start, stop;
+    /**
+     * A button to submit the workout once the clock is stopped
+     */
     Button submitWorkout;
+    /**
+     * A SPinner to choose a type of workout
+     */
     Spinner mySpinner;
-    long lengthOfWorkout;
-    String workoutType;
-    long startTime;
-    long caloriesBurned;
-    String weight;
+    /**
+     * long variables for the length of the workout, the starttime of the workout, and the amount of calories burned
+     */
+    long lengthOfWorkout, startTime, caloriesBurned;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,21 +109,37 @@ public class TrackWorkoutActivity extends AppCompatActivity {
         setButtonVisibility(false);
     }
 
+    /**
+     * When start is clicked, the clock begins timing the workout
+     * @param view An instance of a view variable
+     */
     public void onStartClicked(View view){
         stopWatchModel.startThread();
         startTime = System.currentTimeMillis();
         setButtonVisibility(true);
     }
 
+    /**
+     * When stop button is clicked, the clock will stop timing
+     * @param view a view variable
+     */
     public void onStopClicked(View view){
         stopWatchModel.handleStop();
         setButtonVisibility(false);
     }
 
+    /**
+     * Displays the text in the clock in HH:mm:ss.mili
+     * @param displayText
+     */
     public void setDisplay(String displayText){
         clockDisplay.setText(displayText);
     }
 
+    /**
+     * When the clock is running only stop button should show. When clcok is stopped, start and submit workout should be visible
+     * @param isRunning
+     */
     public void setButtonVisibility(boolean isRunning){
         if(isRunning){
             stop.setVisibility(View.VISIBLE);
@@ -109,6 +152,10 @@ public class TrackWorkoutActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * When submit workout is clicked, the workout will be sent to the database and added to the User's workouts
+     * @param view
+     */
     public void onSubmitClicked(View view){
         lengthOfWorkout = stopWatchModel.getElapsedTime();
         workoutType = mySpinner.getSelectedItem().toString();
@@ -136,6 +183,13 @@ public class TrackWorkoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * A method to calculate the number of calories burned while doing a specific type of activity
+     * @param workoutType
+     * @param myWeight
+     * @param lengthOfWorkout
+     * @return
+     */
     public static long calculateCals(String workoutType, String myWeight, long lengthOfWorkout){
         long weight = Long.valueOf(myWeight);
         lengthOfWorkout = lengthOfWorkout / 60000;
