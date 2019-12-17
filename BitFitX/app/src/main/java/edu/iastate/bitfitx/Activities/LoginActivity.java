@@ -15,6 +15,9 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity manages login and registration of users into the application
+ */
 public class LoginActivity extends AppCompatActivity {
 
     /**
@@ -121,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * If the username and password are correct, changes activity to the Dashboard Activity page
-     * @param String The user's email
+     * @param email The user's email
      */
     public void openDashboard(String email){
         Intent intent = new Intent(this, DashboardActivity.class);

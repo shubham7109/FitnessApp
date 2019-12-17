@@ -21,6 +21,10 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity handles the setting interface for the application like, updating user weight
+ * weight goal and more.
+ */
 public class SettingsActivity extends AppCompatActivity {
 
     /**

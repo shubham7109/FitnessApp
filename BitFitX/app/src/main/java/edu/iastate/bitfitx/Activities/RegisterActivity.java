@@ -14,6 +14,10 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity handles the registration of users to the
+ * and then adds them to the database
+ */
 public class RegisterActivity extends AppCompatActivity {
 
     /**

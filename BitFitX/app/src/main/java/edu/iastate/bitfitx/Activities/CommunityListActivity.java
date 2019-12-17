@@ -25,8 +25,14 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity displays a list of all workouts among all users
+ */
 public class CommunityListActivity extends AppCompatActivity {
 
+    /**
+     * List of workouts from all users
+     */
     ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
 
     @Override
@@ -40,6 +46,8 @@ public class CommunityListActivity extends AppCompatActivity {
         dataProvider.getAllWorkouts(new Interfaces.WorkoutlistCallback() {
             @Override
             public void onCompleted(ArrayList<WorkoutModel> workouts) {
+
+                //Set up the RV
                 workoutModels = workouts;
                 WorkoutHistoryAdapter adapter = new WorkoutHistoryAdapter(CommunityListActivity.this);
                 recyclerView.setLayoutManager(new LinearLayoutManager(CommunityListActivity.this));
@@ -56,6 +64,9 @@ public class CommunityListActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Adapter to handle the Recycler view population.
+     */
     public class WorkoutHistoryAdapter extends RecyclerView.Adapter<WorkoutHistoryAdapter.ViewHolder> {
 
         private LayoutInflater mInflater;
@@ -98,7 +109,7 @@ public class CommunityListActivity extends AppCompatActivity {
 
 
         // stores and recycles views as they are scrolled off screen
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        class ViewHolder extends RecyclerView.ViewHolder{
             TextView date;
             TextView workoutType;
             TextView workoutLength;

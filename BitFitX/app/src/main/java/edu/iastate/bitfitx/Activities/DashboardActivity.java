@@ -23,6 +23,10 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity is the main Dashboard interface for the user, provides statistical information and
+ * navigational features for other activities
+ */
 public class DashboardActivity extends AppCompatActivity {
 
     /**

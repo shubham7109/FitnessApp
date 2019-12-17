@@ -16,6 +16,10 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity is only used for testing purposes.
+ * It is not part of the final application.
+ */
 public class DatabaseTestActivity extends AppCompatActivity{
 
     DataProvider dataProvider;

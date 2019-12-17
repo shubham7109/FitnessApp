@@ -26,9 +26,18 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity represents a list of the users history of workouts
+ */
 public class WorkoutHistoryActivity extends AppCompatActivity {
 
+    /**
+     * Instance of the sharedPrefs for retiring the user email
+     */
     SharedPreferences mSharedPreferences;
+    /**
+     * List of the workout models of the given user
+     */
     ArrayList<WorkoutModel> workoutModels = new ArrayList<>();
 
     @Override
@@ -62,7 +71,9 @@ public class WorkoutHistoryActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     *  This adapter helps populate the RV to the list of the user's workout history
+     */
     public class WorkoutHistoryAdapter extends RecyclerView.Adapter<WorkoutHistoryAdapter.ViewHolder> {
 
         private LayoutInflater mInflater;

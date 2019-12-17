@@ -38,6 +38,10 @@ import edu.iastate.bitfitx.R;
 import edu.iastate.bitfitx.Utils.DataProvider;
 import edu.iastate.bitfitx.Utils.Interfaces;
 
+/**
+ * This activity visualizes a history of weight logged by the user, and list them
+ * in order.
+ */
 public class WeightGraphActivity extends AppCompatActivity {
 
     ArrayList<WeightModel> weightModels;
@@ -75,6 +79,9 @@ public class WeightGraphActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sets up the adapter and the RV
+     */
     private void setUpRV() {
         final RecyclerView recyclerView = findViewById(R.id.weight_history_rv);
         WeightHistoryAdapter adapter = new WeightHistoryAdapter(WeightGraphActivity.this);
@@ -82,6 +89,10 @@ public class WeightGraphActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Sets up the graph and animations
+     * @param weightModels List of all the weights of the user
+     */
     private void setUpGraph(ArrayList<WeightModel> weightModels) {
         GraphView graph = findViewById(R.id.graph);
         DataPoint[] dataPoints = new DataPoint[weightModels.size()];
@@ -124,6 +135,9 @@ public class WeightGraphActivity extends AppCompatActivity {
     }
 
 
+    /**
+     *  This adapter helps populate the RV to the list of the user's weights
+     */
     public class WeightHistoryAdapter extends RecyclerView.Adapter<WeightHistoryAdapter.ViewHolder> {
 
         private LayoutInflater mInflater;
