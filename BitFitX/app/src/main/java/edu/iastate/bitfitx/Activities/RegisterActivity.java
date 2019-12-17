@@ -47,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         dp = DataProvider.getInstance();
-        // mSharedPreferences = getSharedPreferences(PACKAGE_NAME, Context.MODE_PRIVATE);
 
         final EditText first_txt = (EditText) findViewById(R.id.firstname_text);
         final EditText last_txt = (EditText) findViewById(R.id.lastname_text);

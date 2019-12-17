@@ -88,6 +88,12 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_to_bottom, R.anim.slide_from_top);
+    }
+
     /**
      * Changes a user's current weight.
      * @param view Change weight button that was clicked
@@ -166,12 +172,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                final String password = editText.getText().toString();
+                final String newPassword = editText.getText().toString();
 
                 dp.getUser(username, new Interfaces.UserCallback() {
                     @Override
                     public void onCompleted(UserModel user) {
-                        user.setPassword(password);
+                        user.setPassword(newPassword);
                         dp.addUser(user, new Interfaces.DataProviderCallback() {
                             @Override
                             public void onCompleted() {
@@ -195,12 +201,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                newWeight = "";
             }
         });
 
         alert.show();
-
     }
 }
 

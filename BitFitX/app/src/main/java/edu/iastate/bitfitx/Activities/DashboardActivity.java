@@ -119,8 +119,14 @@ public class DashboardActivity extends AppCompatActivity {
                 Toast.makeText(DashboardActivity.this, "Error: " + msg, Toast.LENGTH_SHORT).show();
             }
         });
+
+        String goalWeight = mSharedPreferences.getString(GOAL_KEY,"");
+        goal.setText(goalWeight + " lbs");
     }
 
+    /**
+     * Resume method to update the users weight and/or stats when they return to the dashboard
+     */
     @Override
     protected void onResume(){
         dp.getUsersWeight(username, new Interfaces.WeightListCallback() {
@@ -149,7 +155,7 @@ public class DashboardActivity extends AppCompatActivity {
         });
 
         String goalWeight = mSharedPreferences.getString(GOAL_KEY,"");
-        goal.setText(goalWeight);
+        goal.setText(goalWeight + " lbs");
 
         super.onResume();
     }
@@ -169,10 +175,12 @@ public class DashboardActivity extends AppCompatActivity {
             Intent intent = new Intent(DashboardActivity.this, SettingsActivity.class);
             intent.putExtra(EMAIL_KEY, username);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_to_top, R.anim.slide_from_bottom);
             return true;
 
         }else if(id==R.id.action_logout){
-            mSharedPreferences.edit().clear().commit();
+            mSharedPreferences.edit().remove(EMAIL_KEY).commit();
+            //mSharedPreferences.edit().clear().commit();
             openLogin();
         }
 
@@ -181,7 +189,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
     /**
-     * This method sets up all the buttons and the activity navigation on button click.
+     * This method sets up all the buttons on the dashboard and navigates to corresponding activity on button click.
      */
     private void setUpNavigationActivities() {
 
