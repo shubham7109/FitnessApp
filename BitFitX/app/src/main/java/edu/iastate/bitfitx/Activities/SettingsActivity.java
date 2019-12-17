@@ -153,5 +153,54 @@ public class SettingsActivity extends AppCompatActivity {
 
         alert.show();
     }
+
+    /**
+     * Updates the user's password.
+     * @param view The button to click to update password
+     */
+    public void passwordClick(View view) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+        final EditText editText = new EditText(this);
+        alert.setTitle("Input password");
+        alert.setView(editText);
+
+        alert.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                final String password = editText.getText().toString();
+
+                dp.getUser(username, new Interfaces.UserCallback() {
+                    @Override
+                    public void onCompleted(UserModel user) {
+                        user.setPassword(password);
+                        dp.addUser(user, new Interfaces.DataProviderCallback() {
+                            @Override
+                            public void onCompleted() {
+                                Toast.makeText(SettingsActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+
+                    }
+                });
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                newWeight = "";
+            }
+        });
+
+        alert.show();
+
+    }
 }
 
